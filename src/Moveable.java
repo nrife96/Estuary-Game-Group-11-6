@@ -11,7 +11,8 @@ abstract class Moveable extends Item{
     }
 
     public void updateLoc(){
-
+        this.xLoc += xIncrement;
+        this.yLoc += yIncrement;
     }
 
 }
