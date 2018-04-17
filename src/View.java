@@ -11,11 +11,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 class View extends JPanel {
-	BufferedImage[] boat;
-	BufferedImage[] wake;
-	BufferedImage[] sand;
-	BufferedImage[][] barriers;
-	BufferedImage water;		// assuming single (background) image of water
+	BufferedImage[] boatPics;
+	BufferedImage[] wakePics;
+	BufferedImage[] sandPics;
+	BufferedImage[][] barriersPics;
+	BufferedImage waterPic;		// assuming single (background) image of water
 
 	final int frameWidth = 800;
 	final int frameHeight = 800;
@@ -24,10 +24,21 @@ class View extends JPanel {
 	final int sandWidth = 30;		// applies to both sand and barriers
 	final int sandHeight = 30;
 
-
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
 	boolean paused;
+
+    // image cycle var's
+    int boatPicNum = 0;
+    final int boatFrameCount = 4;
+    int wakePicNum = 0;
+    final int wakeFrameCount = 1;
+
+    // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
+    // ArrayList<Boat> boats;
+    // ArrayList<Wake> wakes;
+    // ArrayList<Sand> beachPiece;
+    // ArrayList<Barrier> towerDefence;
 
 	public View() {
 		// initialize stuff
