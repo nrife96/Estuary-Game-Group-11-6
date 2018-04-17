@@ -1,10 +1,9 @@
+
 class Boat extends Moveable{
 
-	private int speed;
-	private String direction;
+    public Boat(int xLoc, int yLoc, int height, int width, int speed, String direction){
 
-	public void updateLoc(){
-		//implemented later
-	}
+        super(xLoc, yLoc, height, width, speed, 0);
+    }
 
 }
