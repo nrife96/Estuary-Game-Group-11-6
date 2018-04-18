@@ -73,6 +73,8 @@ class View extends JPanel {
 
     public int getSandHeight(){return shoreHeight;}
 
+    public boolean isPaused(){return paused;}
+
     // import image by image
     public BufferedImage createImage(String filename){
     	BufferedImage bufferedImage;
