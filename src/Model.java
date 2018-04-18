@@ -38,11 +38,14 @@ class Model{
     }//Model
 
     public void update(){
+        
         spawnBoat();
+        checkBoatsOffScreen();
+        
     }//update
         
 
-    
+    // TODO verify working 
     public void spawnBoat(){
 
         int spawnChance = 100; //Spawns every n times
@@ -73,9 +76,10 @@ class Model{
             //Random speed up to max
             int speed = rand.nextInt(maxSpeed+1);
 
-            System.out.println(xLoc + " " + yLoc + " " + speed + " " + direction);
+            // System.out.println(xLoc + " " + yLoc + " " + speed + " " + direction);
 
             Boat newBoat = new Boat(xLoc,yLoc,1,1,speed,direction);
+            fleet.add(newBoat);
 
         }
 
@@ -85,10 +89,31 @@ class Model{
         
     }//addBoat
     
-    public void removeShore(Shore shore){
-        shore.destroy();
-    }//removeShore
+    public void processClick(){}
+
+    public void spawnWaves(){}
+
+    public void moveBoats(){}
+
+    public void moveWakes(){}
     
+    // TODO verify working 
+    public void checkBoatsOffScreen(){
+
+        for(Boat b:fleet){
+
+            if( b.xLoc > frameWidth){
+                fleet.remove(b);
+            }
+
+            else if(b.xLoc+b.width < 0){
+                fleet.remove(b);
+            }
+
+        }
+
+    }
+
     public void checkForCollisions(){
         
     }//checkForCollisions
@@ -96,8 +121,6 @@ class Model{
     public void switchTool(Tool newTool){
         
     }//switchTool1
-    
-    
     
     Collection<Boat> getBoats(){
         return fleet;
