@@ -6,9 +6,9 @@ class Model{
     
     //Collections for the boats, wakes, shore segments and barriers
     Collection<Boat> fleet = new ArrayList<Boat>();
-    // Collection<Wake> wakes = new ArrayList<Wake>();
+    Collection<Wake> wakes = new ArrayList<Wake>();
     Collection<Shore> shoreline = new ArrayList<Shore>();
-    // Collection<Barrier> barrierDefense = new ArrayList<Barrier>();
+    Collection<Barrier> barrierDefense = new ArrayList<Barrier>();
     
     //Tools tool;
     int level;              //difficulty level
@@ -49,14 +49,14 @@ class Model{
     Collection<Boat> getBoats(){
         return fleet;
     };
-    // Collection<Wakes> getWakes(){
-    //     return wakes;
-    // };
+    Collection<Wake> getWakes(){
+        return wakes;
+    };
     Collection<Shore> getShoreline(){
         return shoreline;
     };
-    // Collection<Barrier> getBarrierDefense(){
-    //     return barrierDefense;
-    // };
+    Collection<Barrier> getBarrierDefense(){
+        return barrierDefense;
+    };
     
 }//Model

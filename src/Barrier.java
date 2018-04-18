@@ -22,7 +22,7 @@ class Barrier extends Stationary{
         return type;
     }
 
-    public int setType(int type){
+    public int setType(String type){
         this.type = type;
     }
 
