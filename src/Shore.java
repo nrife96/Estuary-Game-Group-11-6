@@ -4,9 +4,4 @@ class Shore extends Stationary{
 		super(xLoc, yLoc, height, width);
 	}
 
-	@Override
-	public void create(){
-		//implemented later
-	}
-
 }
