@@ -7,8 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
+
+import java.util.Collection;
 
 class View extends JPanel {
 	BufferedImage[] boatPics;
@@ -21,12 +22,12 @@ class View extends JPanel {
 	final int frameHeight = 800;
 	final int boatWidth = 60;
 	final int boatHeight = 60;
-	final int sandWidth = 30;		// applies to both sand and barriers
-	final int sandHeight = 30;
+	final int shoreWidth = 30;		// applies to both sand and barriers
+	final int shoreHeight = 30;
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
-	boolean paused;
+	boolean paused;            // should view or controller contain paused?
 
     // image cycle var's
     int boatPicNum = 0;
@@ -35,14 +36,13 @@ class View extends JPanel {
     final int wakeFrameCount = 1;
 
     // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
-    // ArrayList<Boat> boats;
-    // ArrayList<Wake> wakes;
-    // ArrayList<Sand> beachPiece;
-    // ArrayList<Barrier> towerDefence;
+    // Collection<Boat> boats;
+    // Collection<Wake> wakes;
+    // Collection<Shore> shorePiece;
+    // Collection<Barrier> barrierDefence;
 
 	public View() {
 		// initialize stuff
-		paused = true;
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -54,11 +54,11 @@ class View extends JPanel {
     }
 
     public void update(){
-    // public void update(Collection<Boat> boats, Collection<Sand> sandBlocks, Collection<Barrier> barriers) {
-        if(!paused){
-            // redraw board
-            repaint();
-        }
+    // public void update(Collection<Boat> boats, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
+        // if(!paused){
+        //     // redraw board
+        //     repaint();
+        // }
     }
 
     public int getWidth(){return frameWidth;}
@@ -69,9 +69,9 @@ class View extends JPanel {
 
     public int getBoatHeight(){return boatHeight;}
 
-    public int getSandWidth(){return sandWidth;}
+    public int getSandWidth(){return shoreWidth;}
 
-    public int getSandHeight(){return sandHeight;}
+    public int getSandHeight(){return shoreHeight;}
 
     // import image by image
     public BufferedImage createImage(String filename){
