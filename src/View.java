@@ -37,28 +37,48 @@ class View extends JPanel {
     final int wakeFrameCount = 1;
 
     // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
-    // Collection<Boat> boats;
+    Collection<Boat> fleet;
     // Collection<Wake> wakes;
     // Collection<Shore> shorePiece;
     // Collection<Barrier> barrierDefence;
 
 	public View() {
-	}
 
+        boatPics = new BufferedImage[boatFrameCount];
+
+        BufferedImage img = createImage("./../images/boatLeft.png");
+        for(int i = 0; i < boatFrameCount; i++) {
+            boatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
+        }
+    }
+    
 	protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
+
+        for(Boat b:fleet){
+            g.drawImage(boatPics[(boatPicNum++) % boatFrameCount], b.xLoc, b.yLoc, Color.BLACK, this);
+            // System.out.println(b);
+        }        
+
+
+
     }
 
     public Dimension getPreferredSize() {
         return new Dimension(frameWidth, frameHeight);
     }
 
-    public void update(){
-    // public void update(Collection<Boat> boats, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
-        // if(!paused){
-        //     // redraw board
-        //     repaint();
-        // }
+    //public void update(){
+    public void update(Collection<Boat> fleet){ //, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
+        if(!paused){
+
+            this.fleet = fleet;
+
+
+            // redraw board
+            repaint();
+        }
     }
 
     public int getWidth(){return frameWidth;}

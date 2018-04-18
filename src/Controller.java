@@ -29,7 +29,7 @@ public class Controller extends JFrame {
                 // update based on whether the game is "paused"
 
                 model.update();
-                view.update();
+                view.update(model.fleet);
 
             }//actionPerformed
 		};//AbastractAction
