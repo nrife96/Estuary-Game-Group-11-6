@@ -14,7 +14,7 @@ class Barrier extends Stationary{
         return health;
     }
 
-    public int setHealth(int newHealth){
+    public void setHealth(int newHealth){
         this.health = newHealth;
     }
 
@@ -22,7 +22,7 @@ class Barrier extends Stationary{
         return type;
     }
 
-    public int setType(String type){
+    public void setType(String type){
         this.type = type;
     }
 

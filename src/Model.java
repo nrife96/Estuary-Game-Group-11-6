@@ -5,30 +5,35 @@ class Model{
     
     
     //Collections for the boats, wakes, shore segments and barriers
-    Collection<Boat> fleet = new ArrayList<Boat>();
-    Collection<Wake> wakes = new ArrayList<Wake>();
-    Collection<Shore> shoreline = new ArrayList<Shore>();
-    Collection<Barrier> barrierDefense = new ArrayList<Barrier>();
+    Collection<Boat> fleet;
+    Collection<Wake> wakes;
+    Collection<Shore> shoreline;
+    Collection<Barrier> barrierDefense;
     
-    //Tools tool;
+    Tool tool;
     int level;              //difficulty level
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     
     public Model(){
+
+        fleet = new ArrayList<Boat>();
+        wakes = new ArrayList<Wake>();
+        shoreline = new ArrayList<Shore>();
+        barrierDefense = new ArrayList<Barrier>();
         
     }//Model
         
-    /* remove once dependent classes are created
+
     
     public void addBoat(Boat boat){
+        fleet.add(boat);
         
     }//addBoat
     
     public void removeShore(Shore shore){
-        
+        shore.destroy();
     }//removeShore
     
-    */
     
     public void update(){
         
@@ -38,13 +43,11 @@ class Model{
         
     }//checkForCollisions
     
-    /* remove once dependent classes are created
-    
     public void switchTool(Tool newTool){
         
     }//switchTool
     
-    */
+    
     
     Collection<Boat> getBoats(){
         return fleet;
