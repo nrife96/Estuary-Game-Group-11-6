@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import java.util.Collection;
 
 class View extends JPanel {
+
 	BufferedImage[] boatPics;
 	BufferedImage[] wakePics;
 	BufferedImage[] sandPics;
@@ -42,7 +43,6 @@ class View extends JPanel {
     // Collection<Barrier> barrierDefence;
 
 	public View() {
-		// initialize stuff
 	}
 
 	protected void paintComponent(Graphics g) {

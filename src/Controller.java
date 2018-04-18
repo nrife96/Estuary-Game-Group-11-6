@@ -20,6 +20,10 @@ public class Controller extends JFrame {
 	int timeRemaining; //
 	
 	public Controller(){
+
+        model = new Model();
+        view = new View();
+
 		drawAction = new AbstractAction(){
             public void actionPerformed(ActionEvent e){
                 // update based on whether the game is "paused"
