@@ -1,13 +1,14 @@
+import java.util.Collection;
+import java.util.ArrayList;
+
 class Model{
-    /*
+    
     
     //Collections for the boats, wakes, shore segments and barriers
-    Collection<Boat> boats = new ArrayList<Boat>();
-    Collection<Wake> wakes = new ArrayList<Wake>();
+    Collection<Boat> fleet = new ArrayList<Boat>();
+    // Collection<Wake> wakes = new ArrayList<Wake>();
     Collection<Shore> shoreline = new ArrayList<Shore>();
-    Collection<Barrier> barrierDefense = new ArrayList<Barrier>();
-    
-    */
+    // Collection<Barrier> barrierDefense = new ArrayList<Barrier>();
     
     //Tools tool;
     int level;              //difficulty level
@@ -45,9 +46,17 @@ class Model{
     
     */
     
-    void getBoats(){};
-    void getWakes(){};
-    void getShoreline(){};
-    void getBarrierDefense(){};
+    Collection<Boat> getBoats(){
+        return fleet;
+    };
+    // Collection<Wakes> getWakes(){
+    //     return wakes;
+    // };
+    Collection<Shore> getShoreline(){
+        return shoreline;
+    };
+    // Collection<Barrier> getBarrierDefense(){
+    //     return barrierDefense;
+    // };
     
 }//Model
