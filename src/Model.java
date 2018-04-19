@@ -1,6 +1,7 @@
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Iterator;
 
 class Model{
     
@@ -22,7 +23,8 @@ class Model{
     int frameHeight;
     int frameWidth;
 
-    int boatWidth = 60;
+    int boatWidth = 175;
+    int boatHeight = 68;
 
 
 
@@ -43,7 +45,7 @@ class Model{
         
         spawnBoat();
         moveBoats();
-        // checkBoatsOffScreen();
+        checkBoatsOffScreen();
 
     }//update
         
@@ -51,7 +53,7 @@ class Model{
     // TODO verify working 
     public void spawnBoat(){
 
-        int spawnChance = 10; //Spawns every n times
+        int spawnChance = 100; //Spawns every n times
 
         if(rand.nextInt(spawnChance) == 0){
             
@@ -82,7 +84,7 @@ class Model{
 
             // System.out.println(speed);
 
-            Boat newBoat = new Boat(xLoc,yLoc,1,1,speed,direction);
+            Boat newBoat = new Boat(xLoc,yLoc,boatWidth,boatHeight,speed,direction);
             fleet.add(newBoat);
 
         }
@@ -107,17 +109,19 @@ class Model{
     // TODO verify working 
     public void checkBoatsOffScreen(){
 
-        for(Boat b:fleet){
+        for (Iterator<Boat> iterator = fleet.iterator(); iterator.hasNext();) {
+            
+            Boat b = iterator.next();
 
             if( b.xLoc > frameWidth){
-                fleet.remove(b);
+                iterator.remove();
             }
 
             else if(b.xLoc+b.width < 0){
-                fleet.remove(b);
+                iterator.remove();
             }
-
         }
+
 
     }
 

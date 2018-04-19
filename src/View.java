@@ -51,17 +51,19 @@ class View extends JPanel {
         for(int i = 0; i < boatFrameCount; i++) {
             boatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
+
+        setBackground(Color.BLUE);
+
     }
     
 	protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
+        if (smoothCounter++ % 10 == 0){boatPicNum++;}
+
         for(Boat b:fleet){
-            if (smoothCounter % 100 == 0){boatPicNum++;}
             g.drawImage(boatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
-            // System.out.println(b);
-            smoothCounter++;
         }        
 
 
@@ -77,7 +79,6 @@ class View extends JPanel {
         if(!paused){
 
             this.fleet = fleet;
-
 
             // redraw board
             repaint();
