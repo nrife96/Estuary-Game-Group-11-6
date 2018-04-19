@@ -179,7 +179,7 @@ class Model{
 
         for(Boat b:fleet){
 
-            if(b.xLoc % wakeColWidth == 0){
+            if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
                 Wake newWake = new Wake(b.xLoc, b.yLoc+b.height, wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
                 wakes.add(newWake);
             }

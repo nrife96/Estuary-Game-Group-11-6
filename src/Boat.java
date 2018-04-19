@@ -25,4 +25,6 @@ class Boat extends Moveable{
     	if (xIncrement <= 1) {isSpeeding = false;}
     }
 
+    public boolean isSpeeding() {return isSpeeding;}
+
 }
