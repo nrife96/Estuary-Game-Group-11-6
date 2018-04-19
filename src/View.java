@@ -22,7 +22,8 @@ class View extends JPanel {
     BufferedImage backGround;
 	BufferedImage sandPic;
 	BufferedImage[][] barriersPics;
-	BufferedImage waterPic;		// assuming single (background) image of water
+    BufferedImage waterPic;		// assuming single (background) image of water
+    BufferedImage[] clockPics;
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
@@ -32,8 +33,9 @@ class View extends JPanel {
     final int shoreHeight = 98;
     final int wakeHeight = 153;
     final int wakeWidth = 158;
+    final int clocksImgSize = 100;
 
-    // final Color clear = new Color(0, 0, 0, 0);
+    final Color clear = new Color(0, 0, 0, 0);
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
@@ -77,6 +79,17 @@ class View extends JPanel {
         //Uncomment when we have pics for the sand
         sandPic = createImage("./../images/sandPiece.png");
 
+        //Clocks pics
+        img = createImage("./../images/clocks.png");
+        int rows = img.getHeight()/clocksImgSize;
+        int cols = img.getWidth()/clocksImgSize;
+        clockPics = new BufferedImage[rows*cols];
+        for(int i = 0; i < cols; i++) {
+            for(int j = 0; j < rows; j++){
+                clockPics[i] = img.getSubimage(clocksImgSize*i, clocksImgSize*j, clocksImgSize, clocksImgSize);
+            }
+        }
+
         // add mouse input
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -113,6 +126,8 @@ class View extends JPanel {
             g.drawImage(sandPic, s.xLoc, s.yLoc, Color.BLACK, this);
             // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
+
+        g.drawImage(clockPics[0], 0, 0, clear, this);
         
     }
 
