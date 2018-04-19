@@ -113,17 +113,17 @@ class View extends JPanel {
         if (smoothCounter++ % 10 == 0){boatPicNum++;}
 
         for(Boat b:fleet){
-            if(b.direction == "Right")
+            if(b.direction.equals("Right"))
                 g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
-            if(b.direction == "Left")
+            if(b.direction.equals("Left"))
                 g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
         }
         
         for(Wake w: wakes){
-            if(w.direction == "Right"){
+            if(w.direction.equals("Right")){
                 g.drawImage(wakePicRight, w.xLoc, w.yLoc, clear, this);
             }
-            if(w.direction == "Left"){
+            if(w.direction.equals("Left")){
                 g.drawImage(wakePicLeft, w.xLoc, w.yLoc, clear, this);
             }
         }//for
