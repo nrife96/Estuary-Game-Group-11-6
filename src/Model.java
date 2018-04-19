@@ -42,7 +42,8 @@ class Model{
     public void update(){
         
         spawnBoat();
-        checkBoatsOffScreen();
+        moveBoats();
+        // checkBoatsOffScreen();
 
     }//update
         
@@ -60,12 +61,12 @@ class Model{
             int dirInt = rand.nextInt(2);
             int xLoc;
             String direction;
-            if(dirInt == 1){
-                direction = "Left";
+            if(dirInt == 0){
+                direction = "Right";
                 xLoc = 0;
             }
             else{
-                direction = "Right";
+                direction = "Left";
                 xLoc = frameWidth - boatWidth;
             }
 
@@ -77,18 +78,14 @@ class Model{
             int yLoc = laneNum*laneHeight;
             
             //Random speed up to max
-            int speed = rand.nextInt(maxSpeed+1);
+            int speed = rand.nextInt(maxSpeed+1)+1;
 
-            // System.out.println(xLoc + " " + yLoc + " " + speed + " " + direction);
+            // System.out.println(speed);
 
             Boat newBoat = new Boat(xLoc,yLoc,1,1,speed,direction);
             fleet.add(newBoat);
 
         }
-
-
-
-        // fleet.add(boat);
         
     }//addBoat
     
@@ -96,7 +93,14 @@ class Model{
 
     public void spawnWaves(){}
 
-    public void moveBoats(){}
+    public void moveBoats(){
+
+        for(Boat b:fleet){
+            b.updateLoc();
+        }
+
+
+    }
 
     public void moveWakes(){}
     

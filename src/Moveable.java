@@ -15,4 +15,12 @@ abstract class Moveable extends Item{
         this.yLoc += yIncrement;
     }
 
+    public void updateXIncrement(int x){
+        this.xIncrement = x;
+    }
+
+    public int getXIncrement(){
+        return this.xIncrement;
+    }
+
 }
