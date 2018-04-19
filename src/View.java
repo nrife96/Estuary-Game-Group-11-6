@@ -19,6 +19,7 @@ class View extends JPanel {
     BufferedImage[] leftBoatPics;
 	BufferedImage wakePicLeft;
     BufferedImage wakePicRight;
+    BufferedImage backGround;
 	BufferedImage sandPic;
 	BufferedImage[][] barriersPics;
 	BufferedImage waterPic;		// assuming single (background) image of water
@@ -68,7 +69,8 @@ class View extends JPanel {
         //Uncomment when we have pics for the waves
         wakePicRight = createImage("./../images/rightWake.png");
         wakePicLeft = createImage("./../images/leftWake.png");
-
+        
+        backGround = createImage("./../images/background.png");
 
         //Uncomment when we have pics for the sand
         sandPic = createImage("./../images/sandPic.png");
@@ -90,7 +92,7 @@ class View extends JPanel {
 	protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-
+        g.drawImage(backGround,0,0,null);
         if (smoothCounter++ % 10 == 0){boatPicNum++;}
 
         for(Boat b:fleet){
@@ -113,7 +115,7 @@ class View extends JPanel {
             g.drawImage(sandPic, s.xLoc, s.yLoc, Color.BLACK, this);
             // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
-
+        
     }
 
     public Dimension getPreferredSize() {
