@@ -53,13 +53,13 @@ class View extends JPanel {
 	public View() {
 
         rightBoatPics = new BufferedImage[boatFrameCount];
-        BufferedImage img = createImage("./../images/boatRight.png");
+        BufferedImage img = createImage("./../images/boatRightspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
             rightBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
 
         leftBoatPics = new BufferedImage[boatFrameCount];
-        img = createImage("./../images/boatLeft.png");
+        img = createImage("./../images/boatLeftspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
             leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
