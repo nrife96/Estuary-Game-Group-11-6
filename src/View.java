@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import javax.swing.JPanel;
 
 import java.util.Collection;
@@ -75,6 +76,13 @@ class View extends JPanel {
 
         setBackground(Color.BLUE);
 
+        // addMouseListener();
+        addMouseListener(new MouseAdapter() { 
+          public void mousePressed(MouseEvent me) { 
+            System.out.println(me.getPoint());
+          } 
+        });
+
     }
     
 	protected void paintComponent(Graphics g) {
@@ -101,7 +109,7 @@ class View extends JPanel {
     }
 
     //public void update(){
-    public void update(Collection<Boat> fleet, Collection<Wake> wakes){ //, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shorePiece) { //Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
