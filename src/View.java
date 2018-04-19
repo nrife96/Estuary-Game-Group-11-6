@@ -25,7 +25,9 @@ class View extends JPanel {
 	final int boatWidth = 175;
 	final int boatHeight = 68;
 	final int shoreWidth = 30;		// applies to both sand and barriers
-	final int shoreHeight = 30;
+    final int shoreHeight = 30;
+    final int wakeHeight = 10;
+    final int wakeWidth = 10;
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
@@ -40,25 +42,40 @@ class View extends JPanel {
 
     // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
     Collection<Boat> fleet;
-    // Collection<Wake> wakes;
+    Collection<Wake> wakes;
     // Collection<Shore> shorePiece;
     // Collection<Barrier> barrierDefence;
 
 	public View() {
 
         rightBoatPics = new BufferedImage[boatFrameCount];
-
         BufferedImage img = createImage("./../images/boatRight.png");
         for(int i = 0; i < boatFrameCount; i++) {
             rightBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
 
         leftBoatPics = new BufferedImage[boatFrameCount];
-
         img = createImage("./../images/boatLeft.png");
         for(int i = 0; i < boatFrameCount; i++) {
             leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
+/*
+        //Uncomment when we have pics for the waves
+        wakePics = new BufferedImage[wakeFrameCount];
+        img = createImage("./../images/wakePics.png");
+        for(int i = 0; i < wakeFrameCount; i++) {
+            wakePics[i] = img.getSubimage(wakeWidth*i, 0, wakeWidth, wakeHeight);
+        }
+*/
+
+/*
+        //Uncomment when we have pics for the sand
+        sandPics = new BufferedImage[sandFrameCount];
+        img = createImage("./../images/sandPics.png");
+        for(int i = 0; i < boatFrameCount; i++) {
+            sandPics[i] = img.getSubimage(sandWidth*i, 0, sandWidth, sandHeight);
+        }
+*/
 
         setBackground(Color.BLUE);
 
@@ -75,8 +92,10 @@ class View extends JPanel {
                 g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
             if(b.direction == "Left")
                 g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
-        }        
-
+        }
+        
+        for(Wake w: wakes)
+        g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], w.xLoc, w.yLoc, Color.BLACK, this);
 
 
     }
@@ -86,10 +105,11 @@ class View extends JPanel {
     }
 
     //public void update(){
-    public void update(Collection<Boat> fleet){ //, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes){ //, Collection<Shore> shorePiece, Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
+            this.wakes = wakes;
 
             // redraw board
             repaint();

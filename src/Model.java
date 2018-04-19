@@ -17,6 +17,7 @@ class Model{
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     final int maxSpeed = 1;
     final int numOfLanes = 5;
+    final int numOfWakeCols = 5;
 
     Random rand = new Random();
 
@@ -26,7 +27,8 @@ class Model{
     int boatWidth = 175;
     int boatHeight = 68;
 
-
+    int wakeHeight = 10;
+    int wakeWidth = 10;
 
 
     public Model(int frameWidth, int frameHeight){
@@ -44,13 +46,14 @@ class Model{
     public void update(){
         
         spawnBoat();
+        spawnWaves();
         moveBoats();
+        moveWakes();
         checkBoatsOffScreen();
 
     }//update
         
 
-    // TODO verify working 
     public void spawnBoat(){
 
         int spawnChance = 30; //Spawns every n times
@@ -110,7 +113,19 @@ class Model{
     
     public void processClick(){}
 
-    public void spawnWaves(){}
+    public void spawnWaves(){
+
+        int wakeColWidth = frameWidth/numOfWakeCols;
+
+        for(Boat b:fleet){
+
+            if(b.xLoc % wakeColWidth == 0){
+                Wake newWake = new Wake(b.xLoc, b.yLoc+b.height, wakeHeight, wakeWidth, Math.abs(b.xIncrement));
+                wakes.add(newWake);
+            }
+        }
+
+    }
 
     public void moveBoats(){
 
@@ -118,10 +133,13 @@ class Model{
             b.updateLoc();
         }
 
-
     }
 
-    public void moveWakes(){}
+    public void moveWakes(){
+        for(Wake w:wakes){
+            w.updateLoc();
+        }
+    }
     
     // TODO verify working 
     public void checkBoatsOffScreen(){
