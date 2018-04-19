@@ -30,6 +30,9 @@ class Model{
     int wakeHeight = 153;
     int wakeWidth = 158;
 
+    int shoreHeight = 100;
+    int shoreWidth = 100;
+
 
     public Model(int frameWidth, int frameHeight){
 
@@ -40,6 +43,21 @@ class Model{
 
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
+
+        int shoreRows = frameHeight/(2*shoreHeight);
+        int shoreCols = frameWidth/shoreWidth;
+
+        for(int i = 0; i < shoreRows; i++){
+            for(int j = 0; j < shoreCols; j++){
+                Shore newShore = new Shore(i*shoreHeight, j*shoreWidth, shoreHeight, shoreWidth);
+                shoreline.add(newShore);
+            }
+        }
+
+        for(Shore s:shoreline){
+            System.out.println(s.xLoc + " " + s.yLoc);
+        }
+
         
     }//Model
 
