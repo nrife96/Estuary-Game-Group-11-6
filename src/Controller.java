@@ -21,8 +21,9 @@ public class Controller extends JFrame {
 	
 	public Controller(){
 
-        model = new Model();
         view = new View();
+        model = new Model(view.getWidth(),view.getHeight());
+
 
 		drawAction = new AbstractAction(){
             public void actionPerformed(ActionEvent e){

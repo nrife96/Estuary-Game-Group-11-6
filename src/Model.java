@@ -22,18 +22,20 @@ class Model{
     int frameHeight;
     int frameWidth;
 
+    int boatWidth = 60;
 
 
 
-    public Model(){
+
+    public Model(int frameWidth, int frameHeight){
 
         fleet = new ArrayList<Boat>();
         wakes = new ArrayList<Wake>();
         shoreline = new ArrayList<Shore>();
         barrierDefense = new ArrayList<Barrier>();
 
-        frameHeight = 100;
-        frameWidth = 100;
+        this.frameHeight = frameHeight;
+        this.frameWidth = frameWidth;
         
     }//Model
 
@@ -41,14 +43,14 @@ class Model{
         
         spawnBoat();
         checkBoatsOffScreen();
-        
+
     }//update
         
 
     // TODO verify working 
     public void spawnBoat(){
 
-        int spawnChance = 100; //Spawns every n times
+        int spawnChance = 10; //Spawns every n times
 
         if(rand.nextInt(spawnChance) == 0){
             
@@ -56,22 +58,23 @@ class Model{
 
             //Pick left(0) or right(1) side
             int dirInt = rand.nextInt(2);
+            int xLoc;
             String direction;
             if(dirInt == 1){
                 direction = "Left";
+                xLoc = 0;
             }
             else{
                 direction = "Right";
+                xLoc = frameWidth - boatWidth;
             }
 
             //Pick side of screen to start on
-            int xLoc = dirInt*frameWidth;
 
             //Pick height to start at
-            int waterSpace = (frameHeight/2);
-            int laneHeight = waterSpace/numOfLanes;
+            int laneHeight = frameHeight/(2*numOfLanes);
             int laneNum = rand.nextInt(numOfLanes);
-            int yLoc = laneNum*laneHeight + waterSpace;
+            int yLoc = laneNum*laneHeight;
             
             //Random speed up to max
             int speed = rand.nextInt(maxSpeed+1);
