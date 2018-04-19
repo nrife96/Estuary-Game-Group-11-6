@@ -21,8 +21,8 @@ class View extends JPanel {
 
 	final int frameWidth = 800;
 	final int frameHeight = 800;
-	final int boatWidth = 60;
-	final int boatHeight = 60;
+	final int boatWidth = 175;
+	final int boatHeight = 68;
 	final int shoreWidth = 30;		// applies to both sand and barriers
 	final int shoreHeight = 30;
 
@@ -35,6 +35,7 @@ class View extends JPanel {
     final int boatFrameCount = 4;
     int wakePicNum = 0;
     final int wakeFrameCount = 1;
+    int smoothCounter = 0;
 
     // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
     Collection<Boat> fleet;
@@ -46,7 +47,7 @@ class View extends JPanel {
 
         boatPics = new BufferedImage[boatFrameCount];
 
-        BufferedImage img = createImage("./../images/boatLeft.png");
+        BufferedImage img = createImage("./../images/boatRight.png");
         for(int i = 0; i < boatFrameCount; i++) {
             boatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
@@ -57,8 +58,10 @@ class View extends JPanel {
         super.paintComponent(g);
 
         for(Boat b:fleet){
-            g.drawImage(boatPics[(boatPicNum++) % boatFrameCount], b.xLoc, b.yLoc, Color.BLACK, this);
+            if (smoothCounter % 100 == 0){boatPicNum++;}
+            g.drawImage(boatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
             // System.out.println(b);
+            smoothCounter++;
         }        
 
 
