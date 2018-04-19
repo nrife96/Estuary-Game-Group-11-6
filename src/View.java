@@ -83,12 +83,16 @@ class View extends JPanel {
 
         //Clocks pics
         img = createImage("./../images/stopwatch.png");
+
         int rows = img.getHeight()/clocksImgSize;
         int cols = img.getWidth()/clocksImgSize;
+
         clockPics = new BufferedImage[rows*cols];
-        for(int i = 0; i < cols; i++) {
-            for(int j = 0; j < rows; j++){
-                clockPics[i] = img.getSubimage(clocksImgSize*i, clocksImgSize*j, clocksImgSize, clocksImgSize);
+        int count = 0;
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++){
+                clockPics[count] = img.getSubimage(clocksImgSize*j, clocksImgSize*i, clocksImgSize, clocksImgSize);
+                count++;
             }
         }
 
@@ -129,7 +133,7 @@ class View extends JPanel {
             // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
 
-        g.drawImage(clockPics[0], 0, 0, clear, this);
+        g.drawImage(clockPics[11], 0, 0, clear, this);
         
     }
 
