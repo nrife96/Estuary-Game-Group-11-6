@@ -33,6 +33,8 @@ class View extends JPanel {
     final int wakeHeight = 153;
     final int wakeWidth = 158;
 
+    final Color clear = new Color(0, 0, 0, 0);
+
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
 	boolean paused;            // should view or controller contain paused?
@@ -75,9 +77,6 @@ class View extends JPanel {
         //Uncomment when we have pics for the sand
         sandPic = createImage("./../images/sandPic.png");
 
-
-        setBackground(Color.BLUE);
-
         // add mouse input
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -97,17 +96,17 @@ class View extends JPanel {
 
         for(Boat b:fleet){
             if(b.direction == "Right")
-                g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
+                g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
             if(b.direction == "Left")
-                g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
+                g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
         }
         
         for(Wake w: wakes){
             if(w.direction == "Right"){
-                g.drawImage(wakePicRight, w.xLoc, w.yLoc, Color.BLUE, this);
+                g.drawImage(wakePicRight, w.xLoc, w.yLoc, clear, this);
             }
             if(w.direction == "Left"){
-                g.drawImage(wakePicLeft, w.xLoc, w.yLoc, Color.BLUE, this);
+                g.drawImage(wakePicLeft, w.xLoc, w.yLoc, clear, this);
             }
         }//for
         
