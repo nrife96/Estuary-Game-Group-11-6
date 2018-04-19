@@ -13,4 +13,7 @@ abstract class Item{
         this.height = height;
     }
 
+    public int getX() {return xLoc;}
+
+    public int getY() {return yLoc;}
 }
