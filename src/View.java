@@ -81,7 +81,6 @@ class View extends JPanel {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 clickFlag = true;
-                System.out.println(me.getPoint().getClass());
                 lastClick = me.getPoint();
             }
         });

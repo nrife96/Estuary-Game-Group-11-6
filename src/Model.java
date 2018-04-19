@@ -147,15 +147,14 @@ class Model{
     public void processClick(){
         
         if (click != null) {
-            // System.out.println(tool.getName());
             switch (tool.getName()) {
                 case ("whistle"):
                     //do stuff
                     Xclick = click.getX();
                     Yclick = click.getY();
                     for (Boat b: fleet) {
-                        if (Math.abs(b.getX() - Xclick) < boatWidth) {
-                            if (Math.abs(b.getY() - Yclick) < boatHeight) {
+                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < boatWidth) {
+                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < boatHeight) {
                                 b.lowerSpeed();
                             }
                         }
