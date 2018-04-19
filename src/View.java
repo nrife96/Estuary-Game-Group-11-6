@@ -82,7 +82,7 @@ class View extends JPanel {
         sandPic = createImage("./../images/sandPiece.png");
 
         //Clocks pics
-        img = createImage("./../images/clocks.png");
+        img = createImage("./../images/stopwatch.png");
         int rows = img.getHeight()/clocksImgSize;
         int cols = img.getWidth()/clocksImgSize;
         clockPics = new BufferedImage[rows*cols];
