@@ -56,6 +56,8 @@ class View extends JPanel {
     Collection<Shore> shoreline;
     // Collection<Barrier> barrierDefence;
 
+    int hour;
+
 	public View() {
 
         rightBoatPics = new BufferedImage[boatFrameCount];
@@ -136,12 +138,14 @@ class View extends JPanel {
     }
 
     //public void update(){
-    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline) { //Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, int hour) { //Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
             this.wakes = wakes;
             this.shoreline =  shoreline;
+
+            this.hour = hour;
 
             // redraw board
             repaint();
