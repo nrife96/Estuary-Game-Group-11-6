@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import javax.swing.JPanel;
+import java.awt.Point;
 
 import java.util.Collection;
 
@@ -17,7 +18,7 @@ class View extends JPanel {
     BufferedImage[] rightBoatPics;
     BufferedImage[] leftBoatPics;
 	BufferedImage wakePic;
-	BufferedImage[] sandPics;
+	BufferedImage sandPic;
 	BufferedImage[][] barriersPics;
 	BufferedImage waterPic;		// assuming single (background) image of water
 
@@ -25,14 +26,16 @@ class View extends JPanel {
 	final int frameHeight = 540;
 	final int boatWidth = 175;
 	final int boatHeight = 68;
-	final int shoreWidth = 30;		// applies to both sand and barriers
-    final int shoreHeight = 30;
+	final int shoreWidth = 100;		// applies to both sand and barriers
+    final int shoreHeight = 100;
     final int wakeHeight = 153;
     final int wakeWidth = 158;
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
 	boolean paused;            // should view or controller contain paused?
+    boolean clickFlag = false;
+    Point lastClick;
 
     // image cycle var's
     int boatPicNum = 0;
@@ -44,7 +47,7 @@ class View extends JPanel {
     // // UNCOMMENT LATER AFTER CLASSES IMPLEMENTED
     Collection<Boat> fleet;
     Collection<Wake> wakes;
-    // Collection<Shore> shorePiece;
+    Collection<Shore> shoreline;
     // Collection<Barrier> barrierDefence;
 
 	public View() {
@@ -65,22 +68,20 @@ class View extends JPanel {
         wakePic = createImage("./../images/wake.png");
 
 
-/*
+
         //Uncomment when we have pics for the sand
-        sandPics = new BufferedImage[sandFrameCount];
-        img = createImage("./../images/sandPics.png");
-        for(int i = 0; i < boatFrameCount; i++) {
-            sandPics[i] = img.getSubimage(sandWidth*i, 0, sandWidth, sandHeight);
-        }
-*/
+        sandPic = createImage("./../images/sandPic.png");
+
 
         setBackground(Color.BLUE);
 
-        // addMouseListener();
-        addMouseListener(new MouseAdapter() { 
-          public void mousePressed(MouseEvent me) { 
-            System.out.println(me.getPoint());
-          } 
+        // add mouse input
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                clickFlag = true;
+                System.out.println(me.getPoint().getClass());
+                lastClick = me.getPoint();
+            }
         });
 
     }
@@ -99,8 +100,13 @@ class View extends JPanel {
         }
         
         for(Wake w: wakes)
-        g.drawImage(wakePic, w.xLoc, w.yLoc, Color.BLUE, this);
+            g.drawImage(wakePic, w.xLoc, w.yLoc, Color.BLUE, this);
 
+        
+        for(Shore s: shoreline){
+            g.drawImage(sandPic, s.xLoc, s.yLoc, Color.BLACK, this);
+            // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
+        }
 
     }
 
@@ -109,15 +115,24 @@ class View extends JPanel {
     }
 
     //public void update(){
-    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shorePiece) { //Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline) { //Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
             this.wakes = wakes;
+            this.shoreline =  shoreline;
 
             // redraw board
             repaint();
         }
+    }
+
+    public boolean getClickFlag(){
+            return clickFlag; 
+    }
+
+    public void setClickFlag(boolean flag){
+        clickFlag = flag; 
     }
 
     public int getWidth(){return frameWidth;}
@@ -133,6 +148,10 @@ class View extends JPanel {
     public int getSandHeight(){return shoreHeight;}
 
     public boolean isPaused(){return paused;}
+
+    public Point getClick(){
+        return lastClick;
+    }
 
     // import image by image
     public BufferedImage createImage(String filename){

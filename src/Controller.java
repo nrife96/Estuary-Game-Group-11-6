@@ -32,6 +32,11 @@ public class Controller extends JFrame {
                 model.update();
                 view.update(model.fleet, model.wakes, model.shoreline);
 
+                if (view.getClickFlag()) {
+                    model.setClick(view.getClick());
+                    view.setClickFlag(false);
+                }
+
             }//actionPerformed
 		};//AbastractAction
 		

@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Iterator;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.Point;
+
 class Model{
     
     
@@ -18,6 +22,8 @@ class Model{
     final int maxSpeed = 1;
     final int numOfLanes = 5;
     final int numOfWakeCols = 5;
+
+    Point click;
 
     Random rand = new Random();
 
@@ -63,6 +69,7 @@ class Model{
 
     public void update(){
         
+        processClick();
         spawnBoat();
         spawnWaves();
         moveBoats();
@@ -129,7 +136,19 @@ class Model{
         
     }//addBoat
     
-    public void processClick(){}
+    public void processClick(){
+        
+        if( click != null){
+            System.out.println("here\n");
+            
+            //DO NOT REMOVE
+            //Used to reset click
+            click = null;
+        }
+
+        
+        
+    }
 
 
     //TODO right moving boats spawn waves weird
@@ -190,6 +209,10 @@ class Model{
     public void switchTool(Tool newTool){
         
     }//switchTool1
+
+    public void setClick(Point click){
+        this.click = click;
+    }
     
     Collection<Boat> getBoats(){
         return fleet;
