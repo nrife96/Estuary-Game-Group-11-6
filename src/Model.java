@@ -59,6 +59,7 @@ class Model{
         numOfWakeCols = (frameWidth/wakeWidth)+10;
 
         int shoreRows = frameHeight/(2*shoreHeight);
+        System.out.println(shoreRows);
         int shoreCols = (frameWidth/shoreWidth)+1;
 
         tool = Tool.WHISTLE;
@@ -67,14 +68,10 @@ class Model{
 
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
-                Shore newShore = new Shore(j*shoreWidth, frameHeight - (i+1)*shoreHeight, shoreHeight, shoreWidth);
+                Shore newShore = new Shore(j*shoreWidth, frameHeight - (i+1)*shoreHeight, shoreWidth, shoreHeight);
                 System.out.println(newShore.xLoc + " " + newShore.yLoc);
                 shoreline.add(newShore);
             }
-        }
-
-        for(Shore s:shoreline){
-            // System.out.println(s.xLoc + " " + s.yLoc);
         }
 
         
@@ -93,7 +90,7 @@ class Model{
     }//update
 
     public void updateTimer() {
-        System.out.println(System.nanoTime()-startTime);
+        // System.out.println(System.nanoTime()-startTime);
     }
         
 
