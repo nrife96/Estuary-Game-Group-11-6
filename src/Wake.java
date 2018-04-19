@@ -7,7 +7,7 @@ class Wake extends Moveable{
 
         //Moves 0 in the x, only in the y
         super(xLoc, yLoc, height, width, 0, speed);
-
+        this.direction = direction;
         //System.out.println(speed);
 
     }

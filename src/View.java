@@ -17,7 +17,8 @@ class View extends JPanel {
 
     BufferedImage[] rightBoatPics;
     BufferedImage[] leftBoatPics;
-	BufferedImage wakePic;
+	BufferedImage wakePicLeft;
+    BufferedImage wakePicRight;
 	BufferedImage sandPic;
 	BufferedImage[][] barriersPics;
 	BufferedImage waterPic;		// assuming single (background) image of water
@@ -65,8 +66,8 @@ class View extends JPanel {
         }
 
         //Uncomment when we have pics for the waves
-        wakePic = createImage("./../images/rightWake.png");
-
+        wakePicRight = createImage("./../images/rightWake.png");
+        wakePicLeft = createImage("./../images/leftWake.png");
 
 
         //Uncomment when we have pics for the sand
@@ -99,9 +100,14 @@ class View extends JPanel {
                 g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
         }
         
-        for(Wake w: wakes)
-            g.drawImage(wakePic, w.xLoc, w.yLoc, Color.BLUE, this);
-
+        for(Wake w: wakes){
+            if(w.direction == "Right"){
+                g.drawImage(wakePicRight, w.xLoc, w.yLoc, Color.BLUE, this);
+            }
+            if(w.direction == "Left"){
+                g.drawImage(wakePicLeft, w.xLoc, w.yLoc, Color.BLUE, this);
+            }
+        }//for
         
         for(Shore s: shoreline){
             g.drawImage(sandPic, s.xLoc, s.yLoc, Color.BLACK, this);
