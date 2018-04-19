@@ -15,19 +15,19 @@ class View extends JPanel {
 
     BufferedImage[] rightBoatPics;
     BufferedImage[] leftBoatPics;
-	BufferedImage[] wakePics;
+	BufferedImage wakePic;
 	BufferedImage[] sandPics;
 	BufferedImage[][] barriersPics;
 	BufferedImage waterPic;		// assuming single (background) image of water
 
-	final int frameWidth = 800;
-	final int frameHeight = 800;
+	final int frameWidth = 960;
+	final int frameHeight = 540;
 	final int boatWidth = 175;
 	final int boatHeight = 68;
 	final int shoreWidth = 30;		// applies to both sand and barriers
     final int shoreHeight = 30;
-    final int wakeHeight = 10;
-    final int wakeWidth = 10;
+    final int wakeHeight = 153;
+    final int wakeWidth = 158;
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
@@ -59,14 +59,10 @@ class View extends JPanel {
         for(int i = 0; i < boatFrameCount; i++) {
             leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
-/*
+
         //Uncomment when we have pics for the waves
-        wakePics = new BufferedImage[wakeFrameCount];
-        img = createImage("./../images/wakePics.png");
-        for(int i = 0; i < wakeFrameCount; i++) {
-            wakePics[i] = img.getSubimage(wakeWidth*i, 0, wakeWidth, wakeHeight);
-        }
-*/
+        wakePic = createImage("./../images/wake.png");
+
 
 /*
         //Uncomment when we have pics for the sand
@@ -95,7 +91,7 @@ class View extends JPanel {
         }
         
         for(Wake w: wakes)
-        g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], w.xLoc, w.yLoc, Color.BLACK, this);
+        g.drawImage(wakePic, w.xLoc, w.yLoc, Color.BLUE, this);
 
 
     }

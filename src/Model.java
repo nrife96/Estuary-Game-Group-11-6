@@ -27,8 +27,8 @@ class Model{
     int boatWidth = 175;
     int boatHeight = 68;
 
-    int wakeHeight = 10;
-    int wakeWidth = 10;
+    int wakeHeight = 153;
+    int wakeWidth = 158;
 
 
     public Model(int frameWidth, int frameHeight){
@@ -113,6 +113,9 @@ class Model{
     
     public void processClick(){}
 
+
+    //TODO right moving boats spawn waves weird
+    //TODO Slow boats should not spawn waves
     public void spawnWaves(){
 
         int wakeColWidth = frameWidth/numOfWakeCols;
@@ -127,6 +130,7 @@ class Model{
 
     }
 
+
     public void moveBoats(){
 
         for(Boat b:fleet){
@@ -135,13 +139,14 @@ class Model{
 
     }
 
+
     public void moveWakes(){
         for(Wake w:wakes){
             w.updateLoc();
         }
     }
     
-    // TODO verify working 
+
     public void checkBoatsOffScreen(){
 
         for (Iterator<Boat> iterator = fleet.iterator(); iterator.hasNext();) {
