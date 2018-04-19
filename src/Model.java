@@ -65,11 +65,11 @@ class Model{
             String direction;
             if(dirInt == 0){
                 direction = "Right";
-                xLoc = 0;
+                xLoc = -boatWidth;
             }
             else{
                 direction = "Left";
-                xLoc = frameWidth - boatWidth;
+                xLoc = frameWidth;
             }
 
             //Pick side of screen to start on
