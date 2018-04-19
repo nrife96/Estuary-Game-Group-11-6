@@ -26,6 +26,7 @@ class Model{
     final int maxSpeed = 10;
     final int numOfLanes = 5;
     int numOfWakeCols;
+    final int gameLenSec = 30;
 
     Point click;
     double Xclick;
@@ -64,7 +65,7 @@ class Model{
 
         tool = Tool.WHISTLE;
 
-        startTime = System.nanoTime();
+        startTime = System.currentTimeMillis();
 
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
@@ -80,18 +81,19 @@ class Model{
     public void update(){
         
         processClick();
+        updateTimer();
         spawnBoat();
         spawnWaves();
         moveBoats();
         moveWakes();
         checkBoatsOffScreen();
-        updateTimer();
 
     }//update
 
     public void updateTimer() {
         // System.out.println(System.nanoTime()-startTime);
-        hour=(hour+1)%12;
+        long sec = (System.currentTimeMillis()-startTime)/1000;
+        hour = (int)(12*sec/gameLenSec)%12;
     }
         
 
