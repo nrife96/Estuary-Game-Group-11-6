@@ -22,7 +22,7 @@ class Model{
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     final int maxSpeed = 1;
     final int numOfLanes = 5;
-    final int numOfWakeCols = (960/68)+2;
+    final int numOfWakeCols = (960/68)+10;
 
     Point click;
     double Xclick;
