@@ -29,7 +29,7 @@ class View extends JPanel {
 	final int boatWidth = 175;
 	final int boatHeight = 68;
 	final int shoreWidth = 100;		// applies to both sand and barriers
-    final int shoreHeight = 100;
+    final int shoreHeight = 98;
     final int wakeHeight = 153;
     final int wakeWidth = 158;
 
@@ -75,7 +75,7 @@ class View extends JPanel {
         backGround = createImage("./../images/background.png");
 
         //Uncomment when we have pics for the sand
-        sandPic = createImage("./../images/sandPic.png");
+        sandPic = createImage("./../images/sandPiece.png");
 
         // add mouse input
         addMouseListener(new MouseAdapter() {

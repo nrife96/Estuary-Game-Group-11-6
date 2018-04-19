@@ -20,7 +20,7 @@ class Model{
     int level;              //difficulty level
 
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
-    final int maxSpeed = 1;
+    final int maxSpeed = 10;
     final int numOfLanes = 5;
     final int numOfWakeCols = (960/68)+10;
 
@@ -39,7 +39,7 @@ class Model{
     int wakeHeight = 63;
     int wakeWidth = 68;
 
-    int shoreHeight = 100;
+    int shoreHeight = 98;
     int shoreWidth = 100;
 
 
@@ -54,13 +54,16 @@ class Model{
         this.frameWidth = frameWidth;
 
         int shoreRows = frameHeight/(2*shoreHeight);
-        int shoreCols = frameWidth/shoreWidth;
+        int shoreCols = (frameWidth/shoreWidth)+1;
 
         tool = Tool.WHISTLE;
 
+        
+
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
-                Shore newShore = new Shore(i*shoreHeight, j*shoreWidth, shoreHeight, shoreWidth);
+                Shore newShore = new Shore(j*shoreWidth, frameHeight - (i+1)*shoreHeight, shoreHeight, shoreWidth);
+                System.out.println(newShore.xLoc + " " + newShore.yLoc);
                 shoreline.add(newShore);
             }
         }
@@ -128,7 +131,7 @@ class Model{
                 int yLoc = laneHeight*laneNum;
                 
                 //Random speed up to max
-                int speed = rand.nextInt(maxSpeed+1)+1;
+                int speed = rand.nextInt(maxSpeed)+1;
 
                 // System.out.println(speed);
 
@@ -186,7 +189,6 @@ class Model{
         }
 
     }
-
 
     public void moveBoats(){
 
