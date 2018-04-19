@@ -133,7 +133,7 @@ class View extends JPanel {
             // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
 
-        g.drawImage(clockPics[11], 0, 0, clear, this);
+        g.drawImage(clockPics[hour], 0, 0, clear, this);
         
     }
 

@@ -91,6 +91,7 @@ class Model{
 
     public void updateTimer() {
         // System.out.println(System.nanoTime()-startTime);
+        hour=(hour+1)%12;
     }
         
 
@@ -188,13 +189,23 @@ class Model{
 
         for(Boat b:fleet){
 
-            if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
-                Wake newWake = new Wake(b.xLoc, b.yLoc+b.height, wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
-                wakes.add(newWake);
-            }
-        }
+            if(b.direction.equals("Left")){
+                if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
+                    Wake newWake = new Wake(b.xLoc+((int)(.75*(b.width))), b.yLoc+((int)(.5*b.height)), wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
+                    wakes.add(newWake);
+                }//if
+            }//if
+            
+            if(b.direction.equals("Right")){
+                if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
+                    Wake newWake = new Wake(b.xLoc, b.yLoc+((int)(.5*b.height)), wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
+                    wakes.add(newWake);
+                }//if
+            }//if
+            
+        }//for
 
-    }
+    }//spawnWaves
 
     public void moveBoats(){
 
