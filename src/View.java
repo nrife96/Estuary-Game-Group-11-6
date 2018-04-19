@@ -33,7 +33,7 @@ class View extends JPanel {
     final int wakeHeight = 153;
     final int wakeWidth = 158;
 
-    final Color clear = new Color(0, 0, 0, 0);
+    // final Color clear = new Color(0, 0, 0, 0);
 
 	// Tool activeTool;			// should we instead just call getter from the Model?
 
