@@ -18,6 +18,9 @@ class Model{
     
     Tool tool;
     int level;              //difficulty level
+    long startTime;
+    long curTime;
+    int hour = 0;
 
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     final int maxSpeed = 10;
@@ -58,7 +61,7 @@ class Model{
 
         tool = Tool.WHISTLE;
 
-        
+        startTime = System.nanoTime();
 
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
@@ -83,8 +86,13 @@ class Model{
         moveBoats();
         moveWakes();
         checkBoatsOffScreen();
+        updateTimer();
 
     }//update
+
+    public void updateTimer() {
+        System.out.println(System.nanoTime()-startTime);
+    }
         
 
     public void spawnBoat(){
