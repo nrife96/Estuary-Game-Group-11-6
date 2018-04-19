@@ -18,12 +18,15 @@ class Model{
     
     Tool tool;
     int level;              //difficulty level
+
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     final int maxSpeed = 1;
     final int numOfLanes = 5;
     final int numOfWakeCols = 5;
 
     Point click;
+    double Xclick;
+    double Yclick;
 
     Random rand = new Random();
 
@@ -53,6 +56,8 @@ class Model{
         int shoreRows = frameHeight/(2*shoreHeight);
         int shoreCols = frameWidth/shoreWidth;
 
+        tool = Tool.WHISTLE;
+
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
                 Shore newShore = new Shore(i*shoreHeight, j*shoreWidth, shoreHeight, shoreWidth);
@@ -61,7 +66,7 @@ class Model{
         }
 
         for(Shore s:shoreline){
-            System.out.println(s.xLoc + " " + s.yLoc);
+            // System.out.println(s.xLoc + " " + s.yLoc);
         }
 
         
@@ -138,18 +143,33 @@ class Model{
     
     public void processClick(){
         
-        if( click != null){
-            System.out.println("here\n");
-            
+        if (click != null) {
+            // System.out.println(tool.getName());
+            switch (tool.getName()) {
+                case ("whistle"):
+                    //do stuff
+                    Xclick = click.getX();
+                    Yclick = click.getY();
+                    for (Boat b: fleet) {
+                        if (Math.abs(b.getX() - Xclick) < boatWidth) {
+                            if (Math.abs(b.getY() - Yclick) < boatHeight) {
+                                b.lowerSpeed();
+                            }
+                        }
+                    }
+
+                    break;
+                case ("shovel"):
+                    //do other stuff
+                    System.out.println(tool.getName());
+                    break;
+            }
             //DO NOT REMOVE
             //Used to reset click
             click = null;
         }
-
-        
         
     }
-
 
     //TODO right moving boats spawn waves weird
     //TODO Slow boats should not spawn waves
