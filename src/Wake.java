@@ -1,6 +1,8 @@
 
 class Wake extends Moveable{
-
+    
+    String direction;
+    
     public Wake(int xLoc, int yLoc, int height, int width, int speed){
 
         //Moves 0 in the x, only in the y
