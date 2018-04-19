@@ -53,39 +53,56 @@ class Model{
     // TODO verify working 
     public void spawnBoat(){
 
-        int spawnChance = 100; //Spawns every n times
+        int spawnChance = 30; //Spawns every n times
 
         if(rand.nextInt(spawnChance) == 0){
-            
-            //Assuming origin is bottom left
 
-            //Pick left(0) or right(1) side
-            int dirInt = rand.nextInt(2);
-            int xLoc;
-            String direction;
-            if(dirInt == 0){
-                direction = "Right";
-                xLoc = -boatWidth;
+            //Find open lanes 
+            ArrayList<String> openLanes = new ArrayList<>();
+            for (int i = 0; i < numOfLanes; i++){
+                openLanes.add(Integer.toString(i));
             }
-            else{
-                direction = "Left";
-                xLoc = frameWidth;
-            }
-
-            //Pick side of screen to start on
-
-            //Pick height to start at
             int laneHeight = frameHeight/(2*numOfLanes);
-            int laneNum = rand.nextInt(numOfLanes);
-            int yLoc = laneNum*laneHeight;
+            for(Boat b:fleet){
+                String lane = Integer.toString(b.yLoc/laneHeight);
+                if( openLanes.contains(lane) )
+                    openLanes.remove(lane);
+            }
+
+            //Make a boat if a lane is avaliable
+            if( !openLanes.isEmpty() ){
+            // if(true){   
             
-            //Random speed up to max
-            int speed = rand.nextInt(maxSpeed+1)+1;
+                //Assuming origin is bottom left
 
-            // System.out.println(speed);
+                //Pick side of screen to start on
+                //Pick left(0) or right(1) side
+                int dirInt = rand.nextInt(2);
+                int xLoc;
+                String direction;
+                if(dirInt == 0){
+                    direction = "Right";
+                    xLoc = -boatWidth;
+                }
+                else{
+                    direction = "Left";
+                    xLoc = frameWidth;
+                }
 
-            Boat newBoat = new Boat(xLoc,yLoc,boatWidth,boatHeight,speed,direction);
-            fleet.add(newBoat);
+                //Pick height to start at
+                int index = rand.nextInt(openLanes.size());
+                int laneNum = Integer.parseInt(openLanes.get(index)); //Choose open lane
+                int yLoc = laneHeight*laneNum;
+                
+                //Random speed up to max
+                int speed = rand.nextInt(maxSpeed+1)+1;
+
+                // System.out.println(speed);
+
+                Boat newBoat = new Boat(xLoc,yLoc,boatWidth,boatHeight,speed,direction);
+                fleet.add(newBoat); 
+
+            }
 
         }
         
