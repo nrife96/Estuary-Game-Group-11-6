@@ -59,7 +59,7 @@ class View extends JPanel {
         }
 
         leftBoatPics = new BufferedImage[boatFrameCount];
-        img = ljhhjvcreateImage("./../images/boatLeftspray.png");
+        img = createImage("./../images/boatLeftspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
             leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
