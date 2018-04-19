@@ -13,7 +13,8 @@ import java.util.Collection;
 
 class View extends JPanel {
 
-	BufferedImage[] boatPics;
+    BufferedImage[] rightBoatPics;
+    BufferedImage[] leftBoatPics;
 	BufferedImage[] wakePics;
 	BufferedImage[] sandPics;
 	BufferedImage[][] barriersPics;
@@ -45,11 +46,18 @@ class View extends JPanel {
 
 	public View() {
 
-        boatPics = new BufferedImage[boatFrameCount];
+        rightBoatPics = new BufferedImage[boatFrameCount];
 
         BufferedImage img = createImage("./../images/boatRight.png");
         for(int i = 0; i < boatFrameCount; i++) {
-            boatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
+            rightBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
+        }
+
+        leftBoatPics = new BufferedImage[boatFrameCount];
+
+        img = createImage("./../images/boatLeft.png");
+        for(int i = 0; i < boatFrameCount; i++) {
+            leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
         }
 
         setBackground(Color.BLUE);
@@ -63,7 +71,10 @@ class View extends JPanel {
         if (smoothCounter++ % 10 == 0){boatPicNum++;}
 
         for(Boat b:fleet){
-            g.drawImage(boatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
+            if(b.direction == "Right")
+                g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
+            if(b.direction == "Left")
+                g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, Color.BLUE, this);
         }        
 
 
