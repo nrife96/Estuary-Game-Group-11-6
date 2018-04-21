@@ -1,32 +1,15 @@
 
-public enum Tool {
-    WHISTLE("whistle",0),
-    SHOVEL("shovel",1);
+class Tool extends Item{
 
-    private static Tool[] tools = values();
     String name;
-    int index;
-    // private String imageName;
 
-    private Tool(String s, int i){
-		name = s;
-		index = i;
-	}
+    public Tool(int xLoc, int yLoc, int width, int height, String name){
+        super(xLoc, yLoc, width, height);
+        this.name = name;
+    }
 
-    public String getName() {
+    public String getName(){
         return name;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-    
-    // public String getImageName() {
-    //     return imageName;
-    // }
-
-    public Tool next(){
-        return tools[(this.ordinal()+1) % tools.length];
-    }//next
+    } 
 
 }

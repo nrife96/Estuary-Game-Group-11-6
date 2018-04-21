@@ -15,6 +15,9 @@ class Model{
     Collection<Wake> wakes;
     Collection<Shore> shoreline;
     Collection<Barrier> barrierDefense;
+
+    Tool shovel;
+    Tool whistle;
     
     Tool tool;
     int level;              //difficulty level
@@ -46,6 +49,10 @@ class Model{
     int shoreHeight = 98;
     int shoreWidth = 100;
 
+    final int whistleHeight = 63;
+    final int whistleWidth = 100;
+    final int shovelImgSize = 128;
+
 
     public Model(int frameWidth, int frameHeight){
 
@@ -57,12 +64,15 @@ class Model{
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
 
+        whistle = new Tool(frameWidth-(int)(1.3*whistleWidth), 0, whistleWidth, whistleHeight, "Whistle");
+        shovel = new Tool(frameWidth-(int)(1.1*shovelImgSize), (int)(1.1*whistleHeight), shovelImgSize, shovelImgSize, "Shovel");
+
         numOfWakeCols = (frameWidth/wakeWidth)+10;
 
         int shoreRows = frameHeight/(2*shoreHeight);
         int shoreCols = (frameWidth/shoreWidth)+1;
 
-        tool = Tool.WHISTLE;
+        tool = whistle;
 
         startTime = System.currentTimeMillis();
 
@@ -157,7 +167,7 @@ class Model{
         
         if (click != null) {
             switch (tool.getName()) {
-                case ("whistle"):
+                case ("Whistle"):
                     //do stuff
                     Xclick = click.getX();
                     Yclick = click.getY();
@@ -170,11 +180,16 @@ class Model{
                     }
 
                     break;
-                case ("shovel"):
+                case ("Shovel"):
                     //do other stuff
                     // System.out.println(tool.getName());
                     break;
             }
+
+            //Check for switch tool
+            
+
+
             //DO NOT REMOVE
             //Used to reset click
             click = null;
