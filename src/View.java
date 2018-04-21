@@ -24,6 +24,8 @@ class View extends JPanel {
 	BufferedImage[][] barriersPics;
     BufferedImage waterPic;		// assuming single (background) image of water
     BufferedImage[] clockPics;
+    BufferedImage whistlePic;
+    BufferedImage shovelPic;
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
@@ -34,6 +36,9 @@ class View extends JPanel {
     final int wakeHeight = 153;
     final int wakeWidth = 158;
     final int clocksImgSize = 100;
+    final int whistleHeight = 63;
+    final int whistleWidth = 100;
+    final int shovelImgSize = 128;
 
     final Color clear = new Color(0, 0, 0, 0);
 
@@ -96,6 +101,12 @@ class View extends JPanel {
             }
         }
 
+        //Whistle pic
+        whistlePic = createImage("./../images/whistle.png");
+
+        //Shovel pic
+        shovelPic = createImage("./../images/shovel.png");
+
         // add mouse input
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -129,11 +140,13 @@ class View extends JPanel {
         }//for
         
         for(Shore s: shoreline){
-            g.drawImage(sandPic, s.xLoc, s.yLoc, Color.BLACK, this);
+            g.drawImage(sandPic, s.xLoc, s.yLoc, clear, this);
             // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);
+        g.drawImage(whistlePic, frameWidth-(int)(1.3*whistleWidth), 0, clear, this);
+        g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelImgSize), (int)(1.1*whistleHeight), clear, this);
         
     }
 
