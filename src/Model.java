@@ -60,7 +60,6 @@ class Model{
         numOfWakeCols = (frameWidth/wakeWidth)+10;
 
         int shoreRows = frameHeight/(2*shoreHeight);
-        System.out.println(shoreRows);
         int shoreCols = (frameWidth/shoreWidth)+1;
 
         tool = Tool.WHISTLE;
@@ -70,7 +69,6 @@ class Model{
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
                 Shore newShore = new Shore(j*shoreWidth, frameHeight - (i+1)*shoreHeight, shoreWidth, shoreHeight);
-                System.out.println(newShore.xLoc + " " + newShore.yLoc);
                 shoreline.add(newShore);
             }
         }
@@ -87,6 +85,7 @@ class Model{
         moveBoats();
         moveWakes();
         checkBoatsOffScreen();
+        checkWakesOffScreen();
 
     }//update
 
@@ -173,7 +172,7 @@ class Model{
                     break;
                 case ("shovel"):
                     //do other stuff
-                    System.out.println(tool.getName());
+                    // System.out.println(tool.getName());
                     break;
             }
             //DO NOT REMOVE
@@ -242,6 +241,19 @@ class Model{
 
 
     }
+
+    public void checkWakesOffScreen(){
+
+        for (Iterator<Wake> iterator = wakes.iterator(); iterator.hasNext();) {
+            
+            Wake w = iterator.next();
+
+            if( w.yLoc > frameWidth){
+                iterator.remove();
+            }
+        }
+    }
+
 
     public void checkForCollisions(){
         
