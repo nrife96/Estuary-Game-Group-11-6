@@ -20,7 +20,7 @@ class View extends JPanel {
 	BufferedImage wakePicLeft;
     BufferedImage wakePicRight;
     BufferedImage backGround;
-	BufferedImage sandPic;
+	BufferedImage[][] sandPics;
 	BufferedImage[][] barriersPics;
     BufferedImage waterPic;		// assuming single (background) image of water
     BufferedImage[] clockPics;
@@ -30,11 +30,14 @@ class View extends JPanel {
 	final int frameWidth = 960;
 	final int frameHeight = 540;
 	final int shoreWidth = 100;		// applies to both sand and barriers
-    final int shoreHeight = 98;
+    final int shoreHeight = 100;
     final int clocksImgSize = 100;
     final int whistleHeight = 63;
     final int whistleWidth = 100;
     final int shovelImgSize = 128;
+
+    int shoreRows = 3;
+    int shoreCols = (frameWidth/shoreWidth)+1;
 
     final Color clear = new Color(0, 0, 0, 0);
 
@@ -80,7 +83,19 @@ class View extends JPanel {
         backGround = createImage("./../images/background.png");
 
         //Uncomment when we have pics for the sand
-        sandPic = createImage("./../images/sandPiece.png");
+        // sandPic = createImage("./../images/sandPiece.png");
+
+        img = createImage("./../images/beach.png");
+        sandPics = new BufferedImage[shoreRows][shoreCols];
+
+        for(int i = 0; i < shoreRows; i++){
+            for(int j = 0; j < shoreCols; j++){
+                System.out.println(j*shoreWidth + " " + i*shoreHeight);
+                sandPics[i][j] = img.getSubimage(j*shoreWidth, i*shoreHeight, shoreWidth, shoreHeight);
+            }
+        }
+
+
 
         //Clocks pics
         img = createImage("./../images/stopwatch.png");
@@ -135,8 +150,15 @@ class View extends JPanel {
             }
         }//for
         
+        int count = 0;
         for(Shore s: shoreline){
-            g.drawImage(sandPic, s.xLoc, s.yLoc, clear, this);
+            int row = count/shoreCols;
+            int col = count%shoreCols;
+
+            if(!s.destroyed){
+                g.drawImage(sandPics[row][col], s.xLoc, s.yLoc, clear, this);
+            }
+            count++;
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);

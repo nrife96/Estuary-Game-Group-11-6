@@ -40,7 +40,7 @@ class Model{
     int frameHeight;
     int frameWidth;
 
-    int shoreHeight = 98;
+    int shoreHeight = 100;
     int shoreWidth = 100;
 
     final int whistleHeight = 63;
@@ -63,7 +63,7 @@ class Model{
 
         numOfWakeCols = (frameWidth/Wake.WIDTH)+10;
 
-        int shoreRows = frameHeight/(2*shoreHeight);
+        int shoreRows = 3;
         int shoreCols = (frameWidth/shoreWidth)+1;
 
         tool = whistle;
