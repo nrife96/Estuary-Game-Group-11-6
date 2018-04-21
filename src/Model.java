@@ -267,23 +267,18 @@ class Model{
 
     public void checkForCollisions(){
 
-        // System.out.println(shoreline.size());
-
         for(Shore s:shoreline){
 
-            Collection<Wake> crashedWakes = new ArrayList<>();
+            for (Iterator<Wake> iterator = wakes.iterator(); iterator.hasNext();) {
 
-            for (Wake w: wakes){
-            
-                if(w.yLoc+w.height>s.yLoc+(.5*s.height) && w.xLoc>s.xLoc && w.xLoc+w.width < s.xLoc + s.width && !s.destroyed){
+                Wake w = iterator.next();
+
+                if(w.yLoc+w.height>s.yLoc+(.5*s.height)  && !s.destroyed && w.xLoc + w.width > s.xLoc && w.xLoc + w.width < s.xLoc + s.width){
                     s.destroy();
-                    crashedWakes.add(w);
-                    
+                    iterator.remove(); 
                 }
                 
             }
-
-            wakes.removeAll(crashedWakes);
 
         }
 

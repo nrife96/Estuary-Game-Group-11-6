@@ -134,22 +134,6 @@ class View extends JPanel {
         g.drawImage(backGround,0,0,null);
         if (smoothCounter++ % 10 == 0){boatPicNum++;}
 
-        for(Boat b:fleet){
-            if(b.direction.equals("Right"))
-                g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
-            if(b.direction.equals("Left"))
-                g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
-        }
-        
-        for(Wake w: wakes){
-            if(w.direction.equals("Right")){
-                g.drawImage(wakePicRight, w.xLoc, w.yLoc, clear, this);
-            }
-            if(w.direction.equals("Left")){
-                g.drawImage(wakePicLeft, w.xLoc, w.yLoc, clear, this);
-            }
-        }//for
-        
         int count = 0;
         for(Shore s: shoreline){
             int row = count/shoreCols;
@@ -159,6 +143,22 @@ class View extends JPanel {
                 g.drawImage(sandPics[row][col], s.xLoc, s.yLoc, clear, this);
             }
             count++;
+        }
+
+        for(Wake w: wakes){
+            if(w.direction.equals("Right")){
+                g.drawImage(wakePicRight, w.xLoc, w.yLoc, clear, this);
+            }
+            if(w.direction.equals("Left")){
+                g.drawImage(wakePicLeft, w.xLoc, w.yLoc, clear, this);
+            }
+        }
+
+        for(Boat b:fleet){
+            if(b.direction.equals("Right"))
+                g.drawImage(rightBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
+            if(b.direction.equals("Left"))
+                g.drawImage(leftBoatPics[(boatPicNum) % boatFrameCount], b.xLoc, b.yLoc, clear, this);
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);
