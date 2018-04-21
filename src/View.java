@@ -32,9 +32,9 @@ class View extends JPanel {
 	final int shoreWidth = 100;		// applies to both sand and barriers
     final int shoreHeight = 100;
     final int clocksImgSize = 100;
-    final int whistleHeight = 63;
-    final int whistleWidth = 100;
-    final int shovelImgSize = 128;
+    final int whistleHeight = 47;
+    final int whistleWidth = 75;
+    final int shovelImgSize = 75;
 
     int shoreRows = 3;
     int shoreCols = (frameWidth/shoreWidth)+1;
@@ -162,8 +162,8 @@ class View extends JPanel {
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);
-        g.drawImage(whistlePic, frameWidth-(int)(1.3*whistleWidth), 0, clear, this);
-        g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelImgSize), (int)(1.1*whistleHeight), clear, this);
+        g.drawImage(whistlePic, frameWidth-(int)(2.3*whistleWidth), 0, clear, this);
+        g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelImgSize), 0, clear, this);
         
     }
 
