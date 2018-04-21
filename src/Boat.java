@@ -4,10 +4,12 @@ class Boat extends Moveable{
     String direction;
     boolean isSpeeding;
 
-    public Boat(int xLoc, int yLoc, int height, int width, int speed, String direction){
+    static int BOAT_HEIGHT = 68;
+    static int BOAT_WIDTH = 175;
 
+    public Boat(int xLoc, int yLoc, int speed, String direction){
 
-        super(xLoc, yLoc, height, width, speed, 0);
+        super(xLoc, yLoc, BOAT_WIDTH, BOAT_HEIGHT, speed, 0);
 
         this.direction = direction;
 

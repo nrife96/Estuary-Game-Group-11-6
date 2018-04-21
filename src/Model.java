@@ -40,8 +40,8 @@ class Model{
     int frameHeight;
     int frameWidth;
 
-    int boatWidth = 175;
-    int boatHeight = 68;
+    // int boatWidth = 175;
+    // int boatHeight = 68;
 
     int wakeHeight = 63;
     int wakeWidth = 68;
@@ -137,7 +137,7 @@ class Model{
                 String direction;
                 if(dirInt == 0){
                     direction = "Right";
-                    xLoc = -boatWidth;
+                    xLoc = -Boat.BOAT_WIDTH;
                 }
                 else{
                     direction = "Left";
@@ -154,7 +154,7 @@ class Model{
 
                 // System.out.println(speed);
 
-                Boat newBoat = new Boat(xLoc,yLoc,boatWidth,boatHeight,speed,direction);
+                Boat newBoat = new Boat(xLoc,yLoc,speed,direction);
                 fleet.add(newBoat); 
 
             }
@@ -172,8 +172,8 @@ class Model{
                     Xclick = click.getX();
                     Yclick = click.getY();
                     for (Boat b: fleet) {
-                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < boatWidth) {
-                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < boatHeight) {
+                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
+                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
                                 b.lowerSpeed();
                             }
                         }

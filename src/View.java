@@ -29,8 +29,6 @@ class View extends JPanel {
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
-	final int boatWidth = 175;
-	final int boatHeight = 68;
 	final int shoreWidth = 100;		// applies to both sand and barriers
     final int shoreHeight = 98;
     final int wakeHeight = 153;
@@ -68,13 +66,13 @@ class View extends JPanel {
         rightBoatPics = new BufferedImage[boatFrameCount];
         BufferedImage img = createImage("./../images/boatRightspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
-            rightBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
+            rightBoatPics[i] = img.getSubimage(Boat.BOAT_WIDTH*i, 0, Boat.BOAT_WIDTH, Boat.BOAT_HEIGHT);
         }
 
         leftBoatPics = new BufferedImage[boatFrameCount];
         img = createImage("./../images/boatLeftspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
-            leftBoatPics[i] = img.getSubimage(boatWidth*i, 0, boatWidth, boatHeight);
+            leftBoatPics[i] = img.getSubimage(Boat.BOAT_WIDTH*i, 0, Boat.BOAT_WIDTH, Boat.BOAT_HEIGHT);
         }
 
         //Uncomment when we have pics for the waves
@@ -181,9 +179,9 @@ class View extends JPanel {
     
     public int getHeight(){return frameHeight;}
 
-    public int getBoatWidth(){return boatWidth;}
+    // public int getBoatWidth(){return boatWidth;}
 
-    public int getBoatHeight(){return boatHeight;}
+    // public int getBoatHeight(){return boatHeight;}
 
     public int getSandWidth(){return shoreWidth;}
 
