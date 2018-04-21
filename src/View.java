@@ -90,7 +90,7 @@ class View extends JPanel {
 
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
-                System.out.println(j*shoreWidth + " " + i*shoreHeight);
+                // System.out.println(j*shoreWidth + " " + i*shoreHeight);
                 sandPics[i][j] = img.getSubimage(j*shoreWidth, i*shoreHeight, shoreWidth, shoreHeight);
             }
         }

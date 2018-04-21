@@ -26,7 +26,7 @@ class Model{
     int hour = 0;
 
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
-    final int maxSpeed = 10;
+    final int maxSpeed = 4;
     final int numOfLanes = 5;
     int numOfWakeCols;
     final int gameLenSec = 30;
@@ -88,8 +88,9 @@ class Model{
         spawnWaves();
         moveBoats();
         moveWakes();
+        checkForCollisions();
         checkBoatsOffScreen();
-        checkWakesOffScreen();
+        // checkWakesOffScreen();
 
     }//update
 
@@ -265,6 +266,27 @@ class Model{
 
 
     public void checkForCollisions(){
+
+        // System.out.println(shoreline.size());
+
+        for(Shore s:shoreline){
+
+            Collection<Wake> crashedWakes = new ArrayList<>();
+
+            for (Wake w: wakes){
+            
+                if(w.yLoc+w.height>s.yLoc+(.5*s.height) && w.xLoc>s.xLoc && w.xLoc+w.width < s.xLoc + s.width && !s.destroyed){
+                    s.destroy();
+                    crashedWakes.add(w);
+                    
+                }
+                
+            }
+
+            wakes.removeAll(crashedWakes);
+
+        }
+
         
     }//checkForCollisions
     
