@@ -70,9 +70,9 @@ class Model{
 
         startTime = System.currentTimeMillis();
 
-        for(int i = 0; i < shoreRows; i++){
+        for(int i = shoreRows; i > 0; i--){
             for(int j = 0; j < shoreCols; j++){
-                Shore newShore = new Shore(j*shoreWidth, frameHeight - (i+1)*shoreHeight, shoreWidth, shoreHeight);
+                Shore newShore = new Shore(j*shoreWidth, frameHeight - i*shoreHeight, shoreWidth, shoreHeight);
                 shoreline.add(newShore);
             }
         }
