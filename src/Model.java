@@ -109,7 +109,7 @@ class Model{
 
             //Find open lanes 
             ArrayList<String> openLanes = new ArrayList<>();
-            for (int i = 0; i < numOfLanes; i++){
+            for (int i = 1; i < numOfLanes; i++){
                 openLanes.add(Integer.toString(i));
             }
             int laneHeight = frameHeight/(2*numOfLanes);
