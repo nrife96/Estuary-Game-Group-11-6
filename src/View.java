@@ -31,8 +31,6 @@ class View extends JPanel {
 	final int frameHeight = 540;
 	final int shoreWidth = 100;		// applies to both sand and barriers
     final int shoreHeight = 98;
-    final int wakeHeight = 153;
-    final int wakeWidth = 158;
     final int clocksImgSize = 100;
     final int whistleHeight = 63;
     final int whistleWidth = 100;
@@ -66,13 +64,13 @@ class View extends JPanel {
         rightBoatPics = new BufferedImage[boatFrameCount];
         BufferedImage img = createImage("./../images/boatRightspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
-            rightBoatPics[i] = img.getSubimage(Boat.BOAT_WIDTH*i, 0, Boat.BOAT_WIDTH, Boat.BOAT_HEIGHT);
+            rightBoatPics[i] = img.getSubimage(Boat.WIDTH*i, 0, Boat.WIDTH, Boat.HEIGHT);
         }
 
         leftBoatPics = new BufferedImage[boatFrameCount];
         img = createImage("./../images/boatLeftspray.png");
         for(int i = 0; i < boatFrameCount; i++) {
-            leftBoatPics[i] = img.getSubimage(Boat.BOAT_WIDTH*i, 0, Boat.BOAT_WIDTH, Boat.BOAT_HEIGHT);
+            leftBoatPics[i] = img.getSubimage(Boat.WIDTH*i, 0, Boat.WIDTH, Boat.HEIGHT);
         }
 
         //Uncomment when we have pics for the waves
@@ -139,7 +137,6 @@ class View extends JPanel {
         
         for(Shore s: shoreline){
             g.drawImage(sandPic, s.xLoc, s.yLoc, clear, this);
-            // System.out.println(s.xLoc + " " + s.yLoc + " " + s.width + " " + s.height);
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);

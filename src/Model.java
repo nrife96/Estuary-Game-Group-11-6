@@ -40,12 +40,6 @@ class Model{
     int frameHeight;
     int frameWidth;
 
-    // int boatWidth = 175;
-    // int boatHeight = 68;
-
-    int wakeHeight = 63;
-    int wakeWidth = 68;
-
     int shoreHeight = 98;
     int shoreWidth = 100;
 
@@ -67,7 +61,7 @@ class Model{
         whistle = new Tool(frameWidth-(int)(1.3*whistleWidth), 0, whistleWidth, whistleHeight, "Whistle");
         shovel = new Tool(frameWidth-(int)(1.1*shovelImgSize), (int)(1.1*whistleHeight), shovelImgSize, shovelImgSize, "Shovel");
 
-        numOfWakeCols = (frameWidth/wakeWidth)+10;
+        numOfWakeCols = (frameWidth/Wake.WIDTH)+10;
 
         int shoreRows = frameHeight/(2*shoreHeight);
         int shoreCols = (frameWidth/shoreWidth)+1;
@@ -137,7 +131,7 @@ class Model{
                 String direction;
                 if(dirInt == 0){
                     direction = "Right";
-                    xLoc = -Boat.BOAT_WIDTH;
+                    xLoc = -Boat.WIDTH;
                 }
                 else{
                     direction = "Left";
@@ -207,14 +201,14 @@ class Model{
 
             if(b.direction.equals("Left")){
                 if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
-                    Wake newWake = new Wake(b.xLoc+((int)(.75*(b.width))), b.yLoc+((int)(.5*b.height)), wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
+                    Wake newWake = new Wake(b.xLoc+((int)(.75*(b.width))), b.yLoc+((int)(.5*b.height)), Math.abs(b.xIncrement),b.direction);
                     wakes.add(newWake);
                 }//if
             }//if
             
             if(b.direction.equals("Right")){
                 if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
-                    Wake newWake = new Wake(b.xLoc, b.yLoc+((int)(.5*b.height)), wakeHeight, wakeWidth, Math.abs(b.xIncrement),b.direction);
+                    Wake newWake = new Wake(b.xLoc, b.yLoc+((int)(.5*b.height)),Math.abs(b.xIncrement),b.direction);
                     wakes.add(newWake);
                 }//if
             }//if
