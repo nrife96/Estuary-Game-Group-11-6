@@ -43,12 +43,14 @@ class Model{
     int shoreHeight = 100;
     int shoreWidth = 100;
 
-    final int whistleHeight = 63;
-    final int whistleWidth = 100;
+
+    // WE NEED A BETTER METHOD TO KEEP THESE VALUES CONSISTENT BETWEEN THE MODEL & VIEW...
+    final int whistleWidth = 75;
+    final int whistleHeight = 47;
     final int shovelWidth = 75;      // why was this 128 when in view it was 75???
-    final int shovelHeight = 54;
-    final int[] shovelStartLocation = {(frameWidth - shovelWidth), 0};
-    final int[] whistleStartLocation = {(frameWidth - (shovelWidth + whistleWidth) ), 0};
+    final int shovelHeight = 47;
+    final int[] shovelStartLocation;
+    final int[] whistleStartLocation;
 
 
 
@@ -61,6 +63,9 @@ class Model{
 
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
+
+        shovelStartLocation = new int[] {(frameWidth - shovelWidth), 0};
+        whistleStartLocation = new int[] {(frameWidth - (shovelWidth + whistleWidth) ), 0};
 
         whistle = new Tool(whistleStartLocation[0], whistleStartLocation[1], whistleWidth, whistleHeight, "Whistle");
         shovel = new Tool(shovelStartLocation[0], shovelStartLocation[1], shovelWidth, shovelHeight, "Shovel");
@@ -171,26 +176,36 @@ class Model{
                     Xclick = click.getX();
                     Yclick = click.getY();
 
-
-
-                    for (Boat b: fleet) {
-                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
-                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
-                                b.lowerSpeed();
+                    // check if shovel was clicked
+                    if ( shovelStartLocation[0] < Xclick && Xclick < (shovelStartLocation[0] + shovelWidth) ) {
+                        if ( shovelStartLocation[1] < Yclick && Yclick < (shovelStartLocation[1] + shovelHeight) ) {
+                            switchTool(shovel);
+                        }
+                    }
+                    // otherwise, check if any boats were clicked
+                    else {
+                        for (Boat b: fleet) {
+                            if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
+                                if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
+                                    b.lowerSpeed();
+                                }
                             }
                         }
                     }
-
                     break;
+
                 case ("Shovel"):
-                    //do other stuff
-                    // System.out.println(tool.getName());
+                    Xclick = click.getX();
+                    Yclick = click.getY();
+
+                    // check if whistle was clicked
+                    if ( (whistleStartLocation[0] < Xclick) && (Xclick < (whistleStartLocation[0] + whistleWidth)) ) {
+                        if ( whistleStartLocation[1] < Yclick && Yclick < (whistleStartLocation[1] + whistleHeight) ) {
+                            switchTool(whistle);
+                        }
+                    }
                     break;
             }
-
-            //Check for switch tool
-            
-
 
             //DO NOT REMOVE
             //Used to reset click
@@ -293,7 +308,7 @@ class Model{
     }//checkForCollisions
     
     public void switchTool(Tool newTool){
-        
+        this.tool = newTool;
     }//switchTool1
 
     public void setClick(Point click){

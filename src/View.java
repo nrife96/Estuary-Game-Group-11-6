@@ -46,10 +46,10 @@ class View extends JPanel {
     final int whistleWidth = 75;
     final int whistleHeight = 47;
     final int shovelWidth = 75;
-    final int shovelHeight = 54;
+    final int shovelHeight = 47;
     // i just defined these to be used in model as well
-    final int[] shovelStartLocation = {(frameWidth - shovelWidth), 0};
-    final int[] whistleStartLocation = {(frameWidth - (shovelWidth + whistleWidth) ), 0};
+    final int[] shovelStartLocation;
+    final int[] whistleStartLocation;
 
     int shoreRows = 3;
     int shoreCols = (frameWidth/shoreWidth)+1;
@@ -82,6 +82,9 @@ class View extends JPanel {
     Cursor shovelCursor;
 
 	public View() {
+
+        shovelStartLocation = new int[] {(frameWidth - shovelWidth), 0};
+        whistleStartLocation = new int[] {(frameWidth - (shovelWidth + whistleWidth) ), 0};
 
         rightBoatPics = new BufferedImage[boatFrameCount];
         BufferedImage img = createImage("./../images/boatRightspray.png");
@@ -139,7 +142,7 @@ class View extends JPanel {
         whistleCursorPic = createImage("./../images/whistleCursor.png");
 
         // shovel cursor pic
-        shovelCursorPic = createImage("./../images/shovel.png");
+        shovelCursorPic = createImage("./../images/shovelCursor.png");
 
         // add mouse input
         addMouseListener(new MouseAdapter() {
@@ -147,13 +150,17 @@ class View extends JPanel {
                 clickFlag = true;
                 lastClick = me.getPoint();
             }
+            // public void mouseClicked(MouseEvent me) {
+            //     clickFlag = true;
+            //     lastClick = me.getPoint();
+            // }
         });
 
         // add whistle & shovel cursors
         Toolkit t = Toolkit.getDefaultToolkit(); 
         whistleCursor = t.createCustomCursor(whistleCursorPic, new Point (0,0), "whistleCursor");
-        shovelCursor = t.createCustomCursor(shovelCursorPic, new Point (0,0), "shovelCursor");
-        setCursor(whistleCursor);
+        shovelCursor = t.createCustomCursor(shovelCursorPic, new Point (0,0), "ShovelCursor");
+        setCursor(whistleCursor);       // default to whistle
 
     }
     
@@ -195,8 +202,8 @@ class View extends JPanel {
         // any particular reason these were drawn this way?
         // g.drawImage(whistlePic, frameWidth-(int)(2.3*whistleWidth), 0, clear, this);
         // g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelWidth), 0, clear, this);
-        g.drawImage(whistlePic, frameWidth-(int)(whistleWidth + shovelWidth), 0, clear, this);
-        g.drawImage(shovelPic, frameWidth-(int)(shovelWidth), 0, clear, this);
+        g.drawImage(whistlePic, whistleStartLocation[0], whistleStartLocation[1], clear, this);
+        g.drawImage(shovelPic, shovelStartLocation[0], shovelStartLocation[1], clear, this);
         
     }
 
@@ -204,7 +211,7 @@ class View extends JPanel {
         return new Dimension(frameWidth, frameHeight);
     }
 
-    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, int hour) { //Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, int hour, Tool activeTool) { //Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
@@ -212,6 +219,9 @@ class View extends JPanel {
             this.shoreline =  shoreline;
 
             this.hour = hour;
+
+            // setCursor(activeTool.getName());
+            setMouseCursor(activeTool.getName());
 
             // redraw board
             repaint();
@@ -242,13 +252,14 @@ class View extends JPanel {
 
     public Point getClick(){return lastClick;}
 
+    // these 2 functions may or may not be used...
     public int[] getShovelLocation() {return shovelStartLocation;}
 
     public int[] getWhistleLocation() {return whistleStartLocation;}
 
     public void setMouseCursor(String c) {
-        if (c.equals("whistle")) {setCursor(whistleCursor);}
-        else {setCursor(shovelCursor);}
+        if (c.equals("Whistle")) {setCursor(whistleCursor);}
+        else if (c.equals("Shovel")) {setCursor(shovelCursor);}
     }
 
     // import image by image
