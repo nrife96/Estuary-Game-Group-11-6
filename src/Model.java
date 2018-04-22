@@ -221,16 +221,16 @@ class Model{
         int wakeColWidth = frameWidth/numOfWakeCols;
 
         for(Boat b:fleet){
-
+            int speed = Math.abs(b.xIncrement);
             if(b.direction.equals("Left")){
-                if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
+                if(b.isSpeeding() && Math.abs(b.xLoc) % wakeColWidth < speed){
                     Wake newWake = new Wake(b.xLoc+((int)(.75*(b.width))), b.yLoc+((int)(.5*b.height)), Math.abs(b.xIncrement),b.direction);
                     wakes.add(newWake);
                 }//if
             }//if
             
             if(b.direction.equals("Right")){
-                if(b.isSpeeding() && b.xLoc % wakeColWidth == 0){
+                if(b.isSpeeding() && b.xLoc % wakeColWidth > wakeColWidth-speed-1){
                     Wake newWake = new Wake(b.xLoc, b.yLoc+((int)(.5*b.height)),Math.abs(b.xIncrement),b.direction);
                     wakes.add(newWake);
                 }//if
