@@ -99,7 +99,7 @@ class Model{
         moveWakes();
         checkForCollisions();
         checkBoatsOffScreen();
-        // checkWakesOffScreen();
+        checkWakesOffScreen();
 
     }//update
 
@@ -275,15 +275,16 @@ class Model{
     }
 
     public void checkWakesOffScreen(){
-
+  
         for (Iterator<Wake> iterator = wakes.iterator(); iterator.hasNext();) {
             
             Wake w = iterator.next();
 
-            if( w.yLoc > frameWidth){
+            if( w.yLoc > frameHeight){
                 iterator.remove();
             }
         }
+
     }
 
 
