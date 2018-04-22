@@ -45,7 +45,11 @@ class Model{
 
     final int whistleHeight = 63;
     final int whistleWidth = 100;
-    final int shovelImgSize = 128;
+    final int shovelWidth = 75;      // why was this 128 when in view it was 75???
+    final int shovelHeight = 54;
+    final int[] shovelStartLocation = {(frameWidth - shovelWidth), 0};
+    final int[] whistleStartLocation = {(frameWidth - (shovelWidth + whistleWidth) ), 0};
+
 
 
     public Model(int frameWidth, int frameHeight){
@@ -58,8 +62,8 @@ class Model{
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
 
-        whistle = new Tool(frameWidth-(int)(1.3*whistleWidth), 0, whistleWidth, whistleHeight, "Whistle");
-        shovel = new Tool(frameWidth-(int)(1.1*shovelImgSize), (int)(1.1*whistleHeight), shovelImgSize, shovelImgSize, "Shovel");
+        whistle = new Tool(whistleStartLocation[0], whistleStartLocation[1], whistleWidth, whistleHeight, "Whistle");
+        shovel = new Tool(shovelStartLocation[0], shovelStartLocation[1], shovelWidth, shovelHeight, "Shovel");
 
         numOfWakeCols = (frameWidth/Wake.WIDTH)+10;
 
@@ -166,6 +170,9 @@ class Model{
                     //do stuff
                     Xclick = click.getX();
                     Yclick = click.getY();
+
+
+
                     for (Boat b: fleet) {
                         if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
                             if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {

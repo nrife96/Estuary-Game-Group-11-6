@@ -2,14 +2,23 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+
+import java.awt.Toolkit;
+import java.awt.event.MouseMotionListener;
+import java.awt.Rectangle;
+import javax.swing.JList;
+
+import javax.swing.ImageIcon;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import javax.swing.JPanel;
 import java.awt.Point;
+import java.awt.Cursor;
 
 import java.util.Collection;
 
@@ -26,15 +35,21 @@ class View extends JPanel {
     BufferedImage[] clockPics;
     BufferedImage whistlePic;
     BufferedImage shovelPic;
+    Image whistleCursorPic;
+    Image shovelCursorPic;
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
 	final int shoreWidth = 100;		// applies to both sand and barriers
     final int shoreHeight = 100;
     final int clocksImgSize = 100;
-    final int whistleHeight = 47;
     final int whistleWidth = 75;
-    final int shovelImgSize = 75;
+    final int whistleHeight = 47;
+    final int shovelWidth = 75;
+    final int shovelHeight = 54;
+    // i just defined these to be used in model as well
+    final int[] shovelStartLocation = {(frameWidth - shovelWidth), 0};
+    final int[] whistleStartLocation = {(frameWidth - (shovelWidth + whistleWidth) ), 0};
 
     int shoreRows = 3;
     int shoreCols = (frameWidth/shoreWidth)+1;
@@ -61,6 +76,10 @@ class View extends JPanel {
     // Collection<Barrier> barrierDefence;
 
     int hour;
+
+    // cursor objects
+    Cursor whistleCursor;
+    Cursor shovelCursor;
 
 	public View() {
 
@@ -95,8 +114,6 @@ class View extends JPanel {
             }
         }
 
-
-
         //Clocks pics
         img = createImage("./../images/stopwatch.png");
 
@@ -118,6 +135,12 @@ class View extends JPanel {
         //Shovel pic
         shovelPic = createImage("./../images/shovel.png");
 
+        // whistle cursor pic
+        whistleCursorPic = createImage("./../images/whistleCursor.png");
+
+        // shovel cursor pic
+        shovelCursorPic = createImage("./../images/shovel.png");
+
         // add mouse input
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -125,6 +148,12 @@ class View extends JPanel {
                 lastClick = me.getPoint();
             }
         });
+
+        // add whistle & shovel cursors
+        Toolkit t = Toolkit.getDefaultToolkit(); 
+        whistleCursor = t.createCustomCursor(whistleCursorPic, new Point (0,0), "whistleCursor");
+        shovelCursor = t.createCustomCursor(shovelCursorPic, new Point (0,0), "shovelCursor");
+        setCursor(whistleCursor);
 
     }
     
@@ -162,8 +191,12 @@ class View extends JPanel {
         }
 
         g.drawImage(clockPics[hour], 0, 0, clear, this);
-        g.drawImage(whistlePic, frameWidth-(int)(2.3*whistleWidth), 0, clear, this);
-        g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelImgSize), 0, clear, this);
+
+        // any particular reason these were drawn this way?
+        // g.drawImage(whistlePic, frameWidth-(int)(2.3*whistleWidth), 0, clear, this);
+        // g.drawImage(shovelPic, frameWidth-(int)(1.1*shovelWidth), 0, clear, this);
+        g.drawImage(whistlePic, frameWidth-(int)(whistleWidth + shovelWidth), 0, clear, this);
+        g.drawImage(shovelPic, frameWidth-(int)(shovelWidth), 0, clear, this);
         
     }
 
@@ -171,7 +204,6 @@ class View extends JPanel {
         return new Dimension(frameWidth, frameHeight);
     }
 
-    //public void update(){
     public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, int hour) { //Collection<Barrier> barriers) {
         if(!paused){
 
@@ -208,8 +240,15 @@ class View extends JPanel {
 
     public boolean isPaused(){return paused;}
 
-    public Point getClick(){
-        return lastClick;
+    public Point getClick(){return lastClick;}
+
+    public int[] getShovelLocation() {return shovelStartLocation;}
+
+    public int[] getWhistleLocation() {return whistleStartLocation;}
+
+    public void setMouseCursor(String c) {
+        if (c.equals("whistle")) {setCursor(whistleCursor);}
+        else {setCursor(shovelCursor);}
     }
 
     // import image by image
