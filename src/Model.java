@@ -40,8 +40,9 @@ class Model{
     int frameHeight;
     int frameWidth;
 
-    int shoreHeight = 100;
-    int shoreWidth = 100;
+    int shoreSize;
+    int shoreRows = 4;
+    int shoreCols = shoreRows*5;
 
 
     // WE NEED A BETTER METHOD TO KEEP THESE VALUES CONSISTENT BETWEEN THE MODEL & VIEW...
@@ -51,8 +52,6 @@ class Model{
     final int shovelHeight = 47;
     final int[] shovelStartLocation;
     final int[] whistleStartLocation;
-
-
 
     public Model(int frameWidth, int frameHeight){
 
@@ -64,6 +63,8 @@ class Model{
         this.frameHeight = frameHeight;
         this.frameWidth = frameWidth;
 
+        this.shoreSize = frameWidth/shoreCols;
+
         shovelStartLocation = new int[] {(frameWidth - shovelWidth), 0};
         whistleStartLocation = new int[] {(frameWidth - (shovelWidth + whistleWidth) ), 0};
 
@@ -72,16 +73,13 @@ class Model{
 
         numOfWakeCols = (frameWidth/Wake.WIDTH)+10;
 
-        int shoreRows = 3;
-        int shoreCols = (frameWidth/shoreWidth)+1;
-
         tool = whistle;
 
         startTime = System.currentTimeMillis();
 
         for(int i = shoreRows; i > 0; i--){
             for(int j = 0; j < shoreCols; j++){
-                Shore newShore = new Shore(j*shoreWidth, frameHeight - i*shoreHeight, shoreWidth, shoreHeight);
+                Shore newShore = new Shore(j*shoreSize, frameHeight - i*shoreSize, shoreSize, shoreSize);
                 shoreline.add(newShore);
             }
         }
@@ -214,8 +212,6 @@ class Model{
         
     }
 
-    //TODO right moving boats spawn waves weird
-    //TODO Slow boats should not spawn waves
     public void spawnWaves(){
 
         int wakeColWidth = frameWidth/numOfWakeCols;
@@ -248,14 +244,12 @@ class Model{
 
     }
 
-
     public void moveWakes(){
         for(Wake w:wakes){
             w.updateLoc();
         }
     }
     
-
     public void checkBoatsOffScreen(){
 
         for (Iterator<Boat> iterator = fleet.iterator(); iterator.hasNext();) {
@@ -287,7 +281,7 @@ class Model{
 
     }
 
-
+    //Fix
     public void checkForCollisions(){
 
         for(Shore s:shoreline){
@@ -310,7 +304,7 @@ class Model{
     
     public void switchTool(Tool newTool){
         this.tool = newTool;
-    }//switchTool1
+    }//switchTool
 
     public void setClick(Point click){
         this.click = click;
@@ -319,12 +313,15 @@ class Model{
     Collection<Boat> getBoats(){
         return fleet;
     };
+
     Collection<Wake> getWakes(){
         return wakes;
     };
+
     Collection<Shore> getShoreline(){
         return shoreline;
     };
+
     Collection<Barrier> getBarrierDefense(){
         return barrierDefense;
     };

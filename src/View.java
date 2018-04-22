@@ -40,8 +40,8 @@ class View extends JPanel {
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
-	final int shoreWidth = 100;		// applies to both sand and barriers
-    final int shoreHeight = 100;
+	// final int shoreWidth = 100;
+    // final int shoreHeight = 100;
     final int clocksImgSize = 100;
     final int whistleWidth = 75;
     final int whistleHeight = 47;
@@ -51,8 +51,9 @@ class View extends JPanel {
     final int[] shovelStartLocation;
     final int[] whistleStartLocation;
 
-    int shoreRows = 3;
-    int shoreCols = (frameWidth/shoreWidth)+1;
+    final int shoreRows = 4;
+    final int shoreCols = shoreRows*5;
+    int shoreSize = frameWidth/shoreCols;
 
     final Color clear = new Color(0, 0, 0, 0);
 
@@ -107,13 +108,13 @@ class View extends JPanel {
         //Uncomment when we have pics for the sand
         // sandPic = createImage("./../images/sandPiece.png");
 
-        img = createImage("./../images/beach.png");
+        img = createImage("./../images/newbeach.png");
         sandPics = new BufferedImage[shoreRows][shoreCols];
 
         for(int i = 0; i < shoreRows; i++){
             for(int j = 0; j < shoreCols; j++){
                 // System.out.println(j*shoreWidth + " " + i*shoreHeight);
-                sandPics[i][j] = img.getSubimage(j*shoreWidth, i*shoreHeight, shoreWidth, shoreHeight);
+                sandPics[i][j] = img.getSubimage(j*shoreSize, i*shoreSize, shoreSize, shoreSize);
             }
         }
 
@@ -244,9 +245,9 @@ class View extends JPanel {
 
     // public int getBoatHeight(){return boatHeight;}
 
-    public int getSandWidth(){return shoreWidth;}
+    // public int getSandWidth(){return shoreWidth;}
 
-    public int getSandHeight(){return shoreHeight;}
+    // public int getSandHeight(){return shoreHeight;}
 
     public boolean isPaused(){return paused;}
 
