@@ -200,15 +200,14 @@ class Model{
                     if ( shovelStartLocation[0] < Xclick && Xclick < (shovelStartLocation[0] + shovelWidth) ) {
                         if ( shovelStartLocation[1] < Yclick && Yclick < (shovelStartLocation[1] + shovelHeight) ) {
                             switchTool(shovel);
+                            break;
                         }
                     }
                     // otherwise, check if any boats were clicked
-                    else {
-                        for (Boat b: fleet) {
-                            if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
-                                if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
-                                    b.lowerSpeed();
-                                }
+                    for (Boat b: fleet) {
+                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
+                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
+                                b.lowerSpeed();
                             }
                         }
                     }
@@ -222,6 +221,7 @@ class Model{
                     if ( (whistleStartLocation[0] < Xclick) && (Xclick < (whistleStartLocation[0] + whistleWidth)) ) {
                         if ( whistleStartLocation[1] < Yclick && Yclick < (whistleStartLocation[1] + whistleHeight) ) {
                             switchTool(whistle);
+                            break;
                         }
                     }
                     break;

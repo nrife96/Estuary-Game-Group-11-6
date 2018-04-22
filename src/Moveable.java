@@ -19,8 +19,13 @@ abstract class Moveable extends Item{
         this.xIncrement = x;
     }
 
+    public void updateYIncrement(int y){
+        this.yIncrement = y;
+    }
+
     public int getXIncrement(){
         return this.xIncrement;
     }
 
+    public int getYIncrement(){return this.yIncrement;}
 }
