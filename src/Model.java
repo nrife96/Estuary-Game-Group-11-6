@@ -46,7 +46,7 @@ class Model{
 
     int barrierHeight = 100;
     int barrierWidth = 100;
-    final int numOfBarriers = 4;
+    final int numOfBarriers = 8;
 
 
     // WE NEED A BETTER METHOD TO KEEP THESE VALUES CONSISTENT BETWEEN THE MODEL & VIEW...
@@ -91,7 +91,7 @@ class Model{
         int spaceForBarrier = frameWidth/numOfBarriers;
         for(int i = 0; i < numOfBarriers; i++){
             
-            Barrier newBarrier = new Barrier((int)((i+.5)*spaceForBarrier) - (barrierWidth/2), frameHeight/2, barrierHeight, barrierWidth, "", 1);
+            Barrier newBarrier = new Barrier((int)((i+.5)*spaceForBarrier) - (barrierWidth/2), frameHeight/2, barrierHeight, barrierWidth, "", 20);
             barrierDefense.add(newBarrier);
         }
 
@@ -294,6 +294,21 @@ class Model{
 
     //Fix
     public void checkForCollisions(){
+
+        for(Barrier b:barrierDefense){
+
+            for (Iterator<Wake> iterator = wakes.iterator(); iterator.hasNext();) {
+
+                Wake w = iterator.next();
+
+                if(w.yLoc+w.height>b.yLoc+(.5*b.height)  && !b.destroyed && w.xLoc + w.width > b.xLoc && w.xLoc + w.width < b.xLoc + b.width){
+                    b.damage(Math.abs(w.yIncrement));
+                    iterator.remove(); 
+                }
+                
+            }
+
+        }
 
         for(Shore s:shoreline){
 

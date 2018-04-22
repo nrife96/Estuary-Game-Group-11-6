@@ -18,6 +18,14 @@ class Barrier extends Stationary{
         this.health = newHealth;
     }
 
+    public void damage(int damageAmount){
+        this.health -= damageAmount;
+        if(this.health <= 0){
+            this.health = 0;
+            this.destroy();
+        }
+    }
+
     public String getType(){
         return type;
     }

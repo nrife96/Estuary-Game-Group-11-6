@@ -186,7 +186,9 @@ class View extends JPanel {
         }
 
         for(Barrier b:barrierDefense){
-            g.drawImage(barriersPics,b.xLoc,b.yLoc, clear, this);
+            if(!b.destroyed){
+                g.drawImage(barriersPics,b.xLoc,b.yLoc, clear, this);
+            }
         }
 
         for(Wake w: wakes){
