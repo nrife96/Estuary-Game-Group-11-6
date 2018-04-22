@@ -24,6 +24,8 @@ class Model{
     long startTime;
     long curTime;
     int hour = 0;
+    boolean timeOver = false;
+    boolean gameOver = false;
 
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
     final int maxSpeed = 4;
@@ -99,16 +101,20 @@ class Model{
     }//Model
 
     public void update(){
-        
-        processClick();
-        updateTimer();
-        spawnBoat();
-        spawnWaves();
-        moveBoats();
-        moveWakes();
-        checkForCollisions();
-        checkBoatsOffScreen();
-        checkWakesOffScreen();
+        if (!gameOver && !timeOver){
+
+            processClick();
+            updateTimer();
+            spawnBoat();
+            spawnWaves();
+            moveBoats();
+            moveWakes();
+            checkForCollisions();
+            checkBoatsOffScreen();
+            checkWakesOffScreen();
+            winCheck();
+
+        }//if
 
     }//update
 
@@ -116,6 +122,11 @@ class Model{
         // System.out.println(System.nanoTime()-startTime);
         long sec = (System.currentTimeMillis()-startTime)/1000;
         hour = (int)(12*sec/gameLenSec)%12;
+
+        if (sec >= 180){
+            timeOver = true;
+        }
+        
     }
         
 
@@ -327,6 +338,23 @@ class Model{
 
         
     }//checkForCollisions
+    
+    public void winCheck(){
+        gameOver = true;
+        
+        for(Shore s:shoreline){
+            if (!s.destroyed){
+                gameOver = false;
+            }//if
+        }//for
+        
+        if (gameOver){
+            System.out.println("GAME OVER: LOSE");
+        }
+        else if (timeOver==true){
+            System.out.println("GAME OVER: WIN");
+        }//if
+    }
     
     public void switchTool(Tool newTool){
         this.tool = newTool;
