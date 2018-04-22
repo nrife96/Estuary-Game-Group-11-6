@@ -28,7 +28,7 @@ class Model{
     boolean gameOver = false;
 
     final int maxBoats = 0; //temporary value, this will hold the maximum number of boats on screen at a given time
-    final int maxSpeed = 4;
+    final int maxSpeed = 100;
     final int numOfLanes = 5;
     int numOfWakeCols;
     final int gameLenSec = 30;
@@ -123,7 +123,7 @@ class Model{
         long sec = (System.currentTimeMillis()-startTime)/1000;
         hour = (int)(12*sec/gameLenSec)%12;
 
-        if (sec >= 180){
+        if (sec >= gameLenSec){
             timeOver = true;
         }
         
