@@ -74,7 +74,7 @@ class View extends JPanel {
     Collection<Boat> fleet;
     Collection<Wake> wakes;
     Collection<Shore> shoreline;
-    // Collection<Barrier> barrierDefence;
+    Collection<Barrier> barrierDefense;
 
     int hour;
 
@@ -212,12 +212,13 @@ class View extends JPanel {
         return new Dimension(frameWidth, frameHeight);
     }
 
-    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, int hour, Tool activeTool) { //Collection<Barrier> barriers) {
+    public void update(Collection<Boat> fleet, Collection<Wake> wakes, Collection<Shore> shoreline, Collection<Barrier> barrierDefense, int hour, Tool activeTool) { //Collection<Barrier> barriers) {
         if(!paused){
 
             this.fleet = fleet;
             this.wakes = wakes;
             this.shoreline =  shoreline;
+            this.barrierDefense = barrierDefense;
 
             this.hour = hour;
 

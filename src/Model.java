@@ -44,6 +44,10 @@ class Model{
     int shoreRows = 4;
     int shoreCols = shoreRows*5;
 
+    int barrierHeight = 100;
+    int barrierWidth = 100;
+    final int numOfBarriers = 4;
+
 
     // WE NEED A BETTER METHOD TO KEEP THESE VALUES CONSISTENT BETWEEN THE MODEL & VIEW...
     final int whistleWidth = 75;
@@ -82,6 +86,13 @@ class Model{
                 Shore newShore = new Shore(j*shoreSize, frameHeight - i*shoreSize, shoreSize, shoreSize);
                 shoreline.add(newShore);
             }
+        }
+
+        int spaceForBarrier = frameWidth/numOfBarriers;
+        for(int i = 0; i < numOfBarriers; i++){
+            
+            Barrier newBarrier = new Barrier(i*spaceForBarrier-(barrierWidth/2), frameHeight/2, barrierHeight, barrierWidth, "", 1);
+            barrierDefense.add(newBarrier);
         }
 
         
