@@ -91,7 +91,7 @@ class Model{
         int spaceForBarrier = frameWidth/numOfBarriers;
         for(int i = 0; i < numOfBarriers; i++){
             
-            Barrier newBarrier = new Barrier(i*spaceForBarrier-(barrierWidth/2), frameHeight/2, barrierHeight, barrierWidth, "", 1);
+            Barrier newBarrier = new Barrier((int)((i+.5)*spaceForBarrier) - (barrierWidth/2), frameHeight/2, barrierHeight, barrierWidth, "", 1);
             barrierDefense.add(newBarrier);
         }
 

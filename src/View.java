@@ -30,7 +30,7 @@ class View extends JPanel {
     BufferedImage wakePicRight;
     BufferedImage backGround;
 	BufferedImage[][] sandPics;
-	BufferedImage[][] barriersPics;
+	BufferedImage barriersPics;
     BufferedImage waterPic;		// assuming single (background) image of water
     BufferedImage[] clockPics;
     BufferedImage whistlePic;
@@ -145,6 +145,9 @@ class View extends JPanel {
         // shovel cursor pic
         shovelCursorPic = createImage("./../images/shovelCursor.png");
 
+        // Barrier image
+        barriersPics = createImage("./../images/grassBarrier.png");
+
         // add mouse input
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
@@ -180,6 +183,10 @@ class View extends JPanel {
                 g.drawImage(sandPics[row][col], s.xLoc, s.yLoc, clear, this);
             }
             count++;
+        }
+
+        for(Barrier b:barrierDefense){
+            g.drawImage(barriersPics,b.xLoc,b.yLoc, clear, this);
         }
 
         for(Wake w: wakes){
