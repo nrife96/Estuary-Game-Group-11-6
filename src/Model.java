@@ -143,7 +143,7 @@ class Model{
             }
             int laneHeight = frameHeight/(2*numOfLanes);
             for(Boat b:fleet){
-                String lane = Integer.toString(b.yLoc/laneHeight);
+                String lane = Integer.toString(b.getY()/laneHeight);
                 if( openLanes.contains(lane) )
                     openLanes.remove(lane);
             }
@@ -200,15 +200,14 @@ class Model{
                     if ( shovelStartLocation[0] < Xclick && Xclick < (shovelStartLocation[0] + shovelWidth) ) {
                         if ( shovelStartLocation[1] < Yclick && Yclick < (shovelStartLocation[1] + shovelHeight) ) {
                             switchTool(shovel);
+                            break;
                         }
                     }
                     // otherwise, check if any boats were clicked
-                    else {
-                        for (Boat b: fleet) {
-                            if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.width) {
-                                if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.height) {
-                                    b.lowerSpeed();
-                                }
+                    for (Boat b: fleet) {
+                        if (0 < (Xclick - b.getX()) && (Xclick - b.getX()) < b.getWidth()) {
+                            if (0 < (Yclick - b.getY()) && (Yclick - b.getY()) < b.getHeight()) {
+                                b.lowerSpeed();
                             }
                         }
                     }
@@ -222,6 +221,7 @@ class Model{
                     if ( (whistleStartLocation[0] < Xclick) && (Xclick < (whistleStartLocation[0] + whistleWidth)) ) {
                         if ( whistleStartLocation[1] < Yclick && Yclick < (whistleStartLocation[1] + whistleHeight) ) {
                             switchTool(whistle);
+                            break;
                         }
                     }
                     break;
@@ -239,17 +239,17 @@ class Model{
         int wakeColWidth = frameWidth/numOfWakeCols;
 
         for(Boat b:fleet){
-            int speed = Math.abs(b.xIncrement);
-            if(b.direction.equals("Left")){
-                if(b.isSpeeding() && Math.abs(b.xLoc) % wakeColWidth < speed){
-                    Wake newWake = new Wake(b.xLoc+((int)(.75*(b.width))), b.yLoc+((int)(.5*b.height)), Math.abs(b.xIncrement),b.direction);
+            int speed = Math.abs(b.getXIncrement());
+            if(b.getDirection().equals("Left")){
+                if(b.isSpeeding() && Math.abs(b.getX()) % wakeColWidth < speed){
+                    Wake newWake = new Wake(b.getX()+((int)(.75*(b.getWidth()))), b.getY()+((int)(.5*b.getHeight())), Math.abs(b.getXIncrement()),b.getDirection());
                     wakes.add(newWake);
                 }//if
             }//if
             
-            if(b.direction.equals("Right")){
-                if(b.isSpeeding() && b.xLoc % wakeColWidth > wakeColWidth-speed-1){
-                    Wake newWake = new Wake(b.xLoc, b.yLoc+((int)(.5*b.height)),Math.abs(b.xIncrement),b.direction);
+            if(b.getDirection().equals("Right")){
+                if(b.isSpeeding() && b.getX() % wakeColWidth > wakeColWidth-speed-1){
+                    Wake newWake = new Wake(b.getX(), b.getY()+((int)(.5*b.getHeight())),Math.abs(b.getXIncrement()),b.getDirection());
                     wakes.add(newWake);
                 }//if
             }//if
@@ -278,11 +278,11 @@ class Model{
             
             Boat b = iterator.next();
 
-            if( b.xLoc > frameWidth){
+            if( b.getX() > frameWidth){
                 iterator.remove();
             }
 
-            else if(b.xLoc+b.width < 0){
+            else if(b.getX()+b.getWidth() < 0){
                 iterator.remove();
             }
         }
@@ -296,7 +296,7 @@ class Model{
             
             Wake w = iterator.next();
 
-            if( w.yLoc > frameHeight){
+            if( w.getY() > frameHeight){
                 iterator.remove();
             }
         }
@@ -312,8 +312,8 @@ class Model{
 
                 Wake w = iterator.next();
 
-                if(w.yLoc+w.height>b.yLoc+(.5*b.height)  && !b.destroyed && w.xLoc + w.width > b.xLoc && w.xLoc + w.width < b.xLoc + b.width){
-                    b.damage(Math.abs(w.yIncrement));
+                if(w.getY()+w.getHeight()>b.getY()+(.5*b.getHeight())  && !b.isDestroyed() && w.getX() + w.getWidth() > b.getX() && w.getX() + w.getWidth() < b.getX() + b.getWidth()){
+                    b.damage(Math.abs(w.getYIncrement()));
                     iterator.remove(); 
                 }
                 
@@ -327,23 +327,20 @@ class Model{
 
                 Wake w = iterator.next();
 
-                if(w.yLoc+w.height>s.yLoc+(.5*s.height)  && !s.destroyed && w.xLoc + w.width > s.xLoc && w.xLoc + w.width < s.xLoc + s.width){
+                if(w.getY()+w.getHeight()>s.getY()+(.5*s.getHeight())  && !s.isDestroyed() && w.getX() + w.getWidth() > s.getX() && w.getX() + w.getWidth() < s.getX() + s.getHeight()){
                     s.destroy();
                     iterator.remove(); 
                 }
-                
             }
-
         }
 
-        
     }//checkForCollisions
-    
+
     public void winCheck(){
         gameOver = true;
         
         for(Shore s:shoreline){
-            if (!s.destroyed){
+            if (!s.isDestroyed()){
                 gameOver = false;
             }//if
         }//for

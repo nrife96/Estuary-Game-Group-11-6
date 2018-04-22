@@ -16,4 +16,8 @@ abstract class Item{
     public int getX() {return xLoc;}
 
     public int getY() {return yLoc;}
+
+    public int getWidth() {return width;}
+
+    public int getHeight() {return height;}
 }

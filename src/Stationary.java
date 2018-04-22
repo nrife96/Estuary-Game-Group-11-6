@@ -16,4 +16,5 @@ abstract class Stationary extends Item{
         destroyed = true;
     }
 
+    public boolean isDestroyed() {return destroyed;}
 } 

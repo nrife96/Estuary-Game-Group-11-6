@@ -29,4 +29,5 @@ class Boat extends Moveable{
 
     public boolean isSpeeding() {return isSpeeding;}
 
+    public String getDirection() {return direction;}
 }
