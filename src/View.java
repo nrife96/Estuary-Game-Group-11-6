@@ -109,7 +109,7 @@ class View extends JPanel {
         //Uncomment when we have pics for the sand
         // sandPic = createImage("./../images/sandPiece.png");
 
-        img = createImage("./../images/newbeach.png");
+        img = createImage("./../images/newBeach.png");
         sandPics = new BufferedImage[shoreRows][shoreCols];
 
         for(int i = 0; i < shoreRows; i++){
