@@ -31,7 +31,7 @@ class Model{
     final int maxSpeed = 4;
     final int numOfLanes = 5;
     int numOfWakeCols;
-    final int gameLenSec = 30;
+    final int gameLenSec = 180;
 
     Point click;
     double Xclick;

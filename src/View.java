@@ -37,6 +37,7 @@ class View extends JPanel {
     BufferedImage shovelPic;
     Image whistleCursorPic;
     Image shovelCursorPic;
+    Image gameOverPic;
 
 	final int frameWidth = 960;
 	final int frameHeight = 540;
@@ -132,7 +133,10 @@ class View extends JPanel {
                 count++;
             }
         }
-
+        
+        //Game Over Pic
+        gameOverPic = createImage("./../images/gameOver.png");
+        
         //Whistle pic
         whistlePic = createImage("./../images/whistle.png");
 
@@ -215,6 +219,11 @@ class View extends JPanel {
         g.drawImage(whistlePic, whistleStartLocation[0], whistleStartLocation[1], clear, this);
         g.drawImage(shovelPic, shovelStartLocation[0], shovelStartLocation[1], clear, this);
         
+        /* dont mind this trainwreck here, just starting to look at adding the game over state
+        if(gameOver){
+            g.drawImage(gameOverPic,((int)(frameWidth/2)-250),((int)(frameHeight/2)),clear,this);
+        }//gameOverPic
+        */
     }
 
     public Dimension getPreferredSize() {
